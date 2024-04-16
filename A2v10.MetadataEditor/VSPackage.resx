@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="110" xml:space="preserve">
-    <value>VSPackage Extension</value>
+    <value>VSPackage Extension (110)</value>
   </data>
   <data name="112" xml:space="preserve">
-    <value>VSPackage Visual Studio Extension Detailed Info</value>
+    <value>VSPackage Visual Studio Extension Detailed Info (112)</value>
   </data>
   <data name="114" xml:space="preserve">
     <value>A2v10 Metadata Editor</value>

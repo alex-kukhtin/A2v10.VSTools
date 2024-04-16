@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2A398DC6-2D5A-44BE-AA4E-B84DC18B9ADB}"
 	ProjectSection(SolutionItems) = preProject
 		Key.snk = Key.snk
+		todo.txt = todo.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplication", "TestApplication\TestApplication.csproj", "{F7418674-222B-4D34-A3AA-AB7A12605F82}"

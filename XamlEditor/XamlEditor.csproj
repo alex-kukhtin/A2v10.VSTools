@@ -55,8 +55,12 @@
     <Compile Include="App\CatalogNode.cs" />
     <Compile Include="App\FieldNode.cs" />
     <Compile Include="App\TableNode.cs" />
+    <Compile Include="Commands\AddDetailsCommand.cs" />
     <Compile Include="Commands\AddCommand.cs" />
+    <Compile Include="Commands\DeleteCommand.cs" />
+    <Compile Include="Commands\AppMenuCommand.cs" />
     <Compile Include="Converters\ObjectToPanelConverter.cs" />
+    <Compile Include="Helpers\JsonHelpers.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Panels\AppPanel.xaml.cs">
       <DependentUpon>AppPanel.xaml</DependentUpon>

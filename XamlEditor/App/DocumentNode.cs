@@ -17,6 +17,18 @@ namespace XamlEditor
 		[JsonIgnore]
 		protected override String ImageName => "Document";
 		protected override String ParentName => "document";
+
+		[JsonIgnore]
+		public override List<FieldNode> DefaultFields => _defaultFields;
+
+		private readonly static List<FieldNode> _defaultFields = new List<FieldNode>()
+		{
+			new FieldNode() { Name = "Id" },
+			new FieldNode() { Name = "Done" },
+			new FieldNode() { Name = "Date" },
+			new FieldNode() { Name = "Number" },
+			new FieldNode() { Name = "Memo" }
+		};
 	}
 
 	public class DocumentsNode : BaseNode

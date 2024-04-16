@@ -55,27 +55,26 @@ namespace XamlEditor
 			d.IsSelected = true;
 		}
 
+		public void DeleteTable(TableNode table)
+		{
+			if (table is CatalogNode catalogNode)
+				if (Catalogs.Contains(catalogNode))
+					Catalogs.Remove(catalogNode);	
+			else if (table is DocumentNode documentNode)
+				if (Documents.Contains(documentNode))
+					Documents.Remove(documentNode);
+		}
 		private void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
 			IsDirty = true;
 		}
 
-		private readonly static JsonSerializerSettings DefaultSettings = new JsonSerializerSettings()
-		{
-			Formatting = Formatting.Indented,
-			NullValueHandling = NullValueHandling.Ignore,	
-			DefaultValueHandling = DefaultValueHandling.Ignore,
-			ContractResolver = new DefaultContractResolver()
-			{
-				NamingStrategy = new CamelCaseNamingStrategy()
-			}
-		};
 
 		[JsonIgnore]
 		public String JsonValue { 
 			get
 			{
-				var x = JsonConvert.SerializeObject(this, DefaultSettings);
+				var x = JsonConvert.SerializeObject(this, JsonHelpers.DefaultSettings);
 				return x;
 			} 
 		}

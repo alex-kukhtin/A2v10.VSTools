@@ -9,7 +9,12 @@ namespace XamlEditor
 {
 	public class FieldNode : BaseNode, IDataErrorInfo
 	{
-		#region
+		private String _title;
+
+		[JsonProperty(Order = 1)]
+		public String Title { get => _title; set { _title = value; OnPropertyChanged(); } }
+
+		#region IDataErrorInfo
 		[JsonIgnore]
 		public String Error => throw new NotImplementedException();
 

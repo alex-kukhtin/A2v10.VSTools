@@ -17,7 +17,19 @@ namespace XamlEditor
 		[JsonIgnore]
 		protected override String ImageName => "Catalog";
 
+		[JsonIgnore]
 		protected override String ParentName => "catalog";
+
+		[JsonIgnore]
+		public override List<FieldNode> DefaultFields => _defaultFields;
+
+		private readonly static List<FieldNode> _defaultFields = new List<FieldNode>()
+		{
+			new FieldNode() { Name = "Id" },
+			new FieldNode() { Name = "Void" },
+			new FieldNode() { Name = "Name" },
+			new FieldNode() { Name = "Memo" }
+		};
 	}
 
 	public class CatalogsNode : BaseNode
@@ -29,6 +41,5 @@ namespace XamlEditor
 			_catalogs = catalogs;
 		}
 		public override IEnumerable<BaseNode> Children => _catalogs;
-
 	}
 }

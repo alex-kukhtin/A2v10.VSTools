@@ -1,10 +1,10 @@
 ﻿// Copyright © 2024 Oleksandr Kukhtin. All rights reserved.
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
+using Newtonsoft.Json;
 
 namespace XamlEditor
 {
@@ -21,11 +21,21 @@ namespace XamlEditor
 
 	public class TableNode : BaseNode
 	{
+		[JsonProperty(Order = 2)]
+		public ObservableCollection<FieldNode> Fields { get; set; } = new ObservableCollection<FieldNode>();
+		public Boolean ShouldSerializeFields() => Fields != null && Fields.Count > 0;
+
+		[JsonProperty(Order = 3)]
+		public ObservableCollection<TableNode> Details { get; set; } = new ObservableCollection<TableNode>();
+		public Boolean ShouldSerializeDetails() => Details != null && Details.Count > 0;
+
+		[JsonIgnore]
+		public virtual List<FieldNode> DefaultFields { get; }
+
 		internal virtual void ApplyDefaults()
 		{
 		}
 
-		[JsonIgnore]
 		public String Endpoint => $"/{ParentName}/{Name.Singular().ToLowerInvariant()}";
 
 		[JsonIgnore]
@@ -34,6 +44,12 @@ namespace XamlEditor
 		public override void OnNameChanged()
 		{
 			OnPropertyChanged(nameof(Endpoint));
+		}
+
+		public void CreateField()
+		{
+			var f = new FieldNode() { Name = $"Field{Fields.Count + 1}" };
+			Fields.Add(f);
 		}
 	}
 

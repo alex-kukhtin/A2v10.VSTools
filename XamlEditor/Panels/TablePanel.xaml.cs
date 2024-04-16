@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright © 2024 Oleksandr Kukhtin. All rights reserved.
+
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace XamlEditor
 {
@@ -22,16 +11,25 @@ namespace XamlEditor
 	public partial class TablePanel : UserControl
 	{
 		private readonly ViewModel _model;
+		private readonly TableNode _table;
 		public TablePanel(TableNode table, ViewModel viewModel)
 		{
 			InitializeComponent();
+			_table = table;	
 			_model = viewModel;	
 			DataContext = table;	
 		}
 
-		private void Expander_Expanded(object sender, RoutedEventArgs e)
+		private void AddField_Click(object sender, RoutedEventArgs e)
 		{
+			_table.CreateField();
+		}
 
+		private void DeleteField_Click(object sender, RoutedEventArgs e)
+		{
+			if (!(e.Source is Button btnObj) || !(btnObj.CommandParameter is FieldNode fn))
+				return;
+			_table.Fields.Remove(fn);
 		}
 	}
 }

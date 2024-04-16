@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Navigation;
 
 namespace TestApplication
 {
@@ -13,5 +14,9 @@ namespace TestApplication
 	/// </summary>
 	public partial class App : Application
 	{
+		protected override void OnLoadCompleted(NavigationEventArgs e)
+		{
+			base.OnLoadCompleted(e);
+		}
 	}
 }
