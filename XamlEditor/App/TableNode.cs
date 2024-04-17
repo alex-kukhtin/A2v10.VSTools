@@ -26,17 +26,20 @@ namespace XamlEditor
 		public Boolean ShouldSerializeFields() => Fields != null && Fields.Count > 0;
 
 		[JsonProperty(Order = 3)]
-		public ObservableCollection<TableNode> Details { get; set; } = new ObservableCollection<TableNode>();
+		public ObservableCollection<DetailsNode> Details { get; set; } = new ObservableCollection<DetailsNode>();
 		public Boolean ShouldSerializeDetails() => Details != null && Details.Count > 0;
 
 		[JsonIgnore]
 		public virtual List<FieldNode> DefaultFields { get; }
 
+		[JsonIgnore]
+		public override IEnumerable<BaseNode> Children => Details;
+
 		internal virtual void ApplyDefaults()
 		{
 		}
 
-		public String Endpoint => $"/{ParentName}/{Name.Singular().ToLowerInvariant()}";
+		public virtual String Endpoint => $"/{ParentName}/{Name.Singular().ToLowerInvariant()}";
 
 		[JsonIgnore]
 		protected virtual String ParentName => String.Empty;
@@ -48,9 +51,15 @@ namespace XamlEditor
 
 		public void CreateField()
 		{
-			var f = new FieldNode() { Name = $"Field{Fields.Count + 1}" };
+			var f = new FieldNode() { Name = $"Field{Fields.Count + 1}", Length = 255 };
 			Fields.Add(f);
 		}
-	}
 
+		public void AddDetails()
+		{
+			var details = new DetailsNode(_root, this) { Name = $"Details{Details.Count + 1}" };
+			Details.Add(details);
+			details.IsSelected = true;
+		}
+	}
 }

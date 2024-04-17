@@ -23,7 +23,7 @@ namespace TestApplication
 		public MainWindow()
 		{
 			InitializeComponent();
-			MetaEditor.LoadDocument("C:\\Projects\\AppBuilder2024\\MainApp\\app.metadata.json");
+			MetaEditor.LoadDocument("C:\\Projects\\AppBuilder2024\\MainApp\\app.metadata");
 		}
 	}
 }

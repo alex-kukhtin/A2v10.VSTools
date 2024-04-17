@@ -1,10 +1,9 @@
-﻿using Newtonsoft.Json.Serialization;
+﻿// Copyright © 2024 Oleksandr Kukhtin. All rights reserved.
+
+using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
-using System;
+using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace XamlEditor
 {
@@ -18,6 +17,9 @@ namespace XamlEditor
 			ContractResolver = new DefaultContractResolver()
 			{
 				NamingStrategy = new CamelCaseNamingStrategy()
+			},
+			Converters = new List<JsonConverter>() {
+				new StringEnumConverter()
 			}
 		};
 	}

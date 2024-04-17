@@ -24,8 +24,7 @@ namespace XamlEditor
 		public override void Execute(Object parameter)
 		{
 			var selNode = SelectedNode();
-			if (selNode != null)
-				MessageBox.Show("Add Details to selected node");
+			selNode?.AddDetails();
 		}
 	}
 }

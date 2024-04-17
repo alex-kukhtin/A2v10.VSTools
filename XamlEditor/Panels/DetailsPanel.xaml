@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="XamlEditor.TablePanel"
+﻿<UserControl x:Class="XamlEditor.DetailsPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -26,7 +26,6 @@
 			<Grid Margin="0, 10">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="Auto"/>
@@ -34,8 +33,6 @@
 				</Grid.ColumnDefinitions>
 				<Label Grid.Row="0" Grid.Column="0" Content="Name"/>
 				<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}"/>
-				<Label Grid.Row="1" Grid.Column="0" Content="Endpoint"/>
-				<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Endpoint, Mode=OneWay}" IsEnabled="False"/>
 			</Grid>
 		</Expander>
 		<Expander Header="Fields" IsExpanded="True" Margin="0,18,0,0">
@@ -105,19 +102,6 @@
 					</ItemsControl.ItemTemplate>
 				</ItemsControl>
 			</StackPanel>
-		</Expander>
-		<Expander Header="User Interface" IsExpanded="True" Margin="0,18,0,0">
-			<TabControl Margin="0, 10">
-				<TabItem Header="Index">
-					<CheckBox />
-				</TabItem>
-				<TabItem Header="Edit Item">
-					<CheckBox Content="Default"/>
-				</TabItem>
-				<TabItem Header="Browse Item">
-					<CheckBox Content="Default"/>
-				</TabItem>
-			</TabControl>
 		</Expander>
 	</StackPanel>
 </UserControl>

@@ -51,22 +51,33 @@
   <ItemGroup>
     <Compile Include="App\AppNode.cs" />
     <Compile Include="App\BaseNode.cs" />
+    <Compile Include="App\EndpointNode.cs" />
+    <Compile Include="App\DetailsNode.cs" />
     <Compile Include="App\DocumentNode.cs" />
     <Compile Include="App\CatalogNode.cs" />
     <Compile Include="App\FieldNode.cs" />
     <Compile Include="App\TableNode.cs" />
+    <Compile Include="App\UiNode.cs" />
     <Compile Include="Commands\AddDetailsCommand.cs" />
     <Compile Include="Commands\AddCommand.cs" />
     <Compile Include="Commands\DeleteCommand.cs" />
     <Compile Include="Commands\AppMenuCommand.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\ObjectToPanelConverter.cs" />
     <Compile Include="Helpers\JsonHelpers.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Markup\EnumBindingSource.cs" />
     <Compile Include="Panels\AppPanel.xaml.cs">
       <DependentUpon>AppPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Panels\EndpointPanel.xaml.cs">
+      <DependentUpon>EndpointPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\TablePanel.xaml.cs">
       <DependentUpon>TablePanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\DetailsPanel.xaml.cs">
+      <DependentUpon>DetailsPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MetadataEditorControl.xaml.cs">
@@ -88,7 +99,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Panels\EndpointPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Panels\TablePanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\DetailsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

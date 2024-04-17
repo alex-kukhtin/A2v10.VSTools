@@ -17,6 +17,7 @@ namespace XamlEditor
 		{
 			Catalogs.CollectionChanged += CollectionChanged;
 			Documents.CollectionChanged += CollectionChanged;
+			Endpoints.CollectionChanged += CollectionChanged;
 		}
 
 		[JsonIgnore]
@@ -26,9 +27,13 @@ namespace XamlEditor
 		public ObservableCollection<CatalogNode> Catalogs { get; set; } = new ObservableCollection<CatalogNode>();
 		public Boolean ShouldSerializeCatalogs() => Catalogs != null && Catalogs.Count > 0;
 
-		[JsonProperty(Order = 11)]
+		[JsonProperty(Order = 12)]
 		public ObservableCollection<DocumentNode> Documents { get; set; } = new ObservableCollection<DocumentNode>();
 		public Boolean ShouldSerializeDocuments() => Documents != null && Documents.Count > 0;
+
+		[JsonProperty(Order = 13)]
+		public ObservableCollection<EndpointNode> Endpoints { get; set; } = new ObservableCollection<EndpointNode>();
+		public Boolean ShouldSerializeEndpoints() => Endpoints != null && Endpoints.Count > 0;
 
 		[JsonIgnore]
 		public override IEnumerable<BaseNode> Children
@@ -37,6 +42,7 @@ namespace XamlEditor
 			{
 				yield return new CatalogsNode(Catalogs);
 				yield return new DocumentsNode(Documents);
+				yield return new EndpointsNode(Endpoints);
 			}
 		}
 
@@ -52,6 +58,12 @@ namespace XamlEditor
 			var d = new DocumentNode(this) { Name = $"Document{Documents.Count + 1}" };
 			d.ApplyDefaults();
 			Documents.Add(d);
+			d.IsSelected = true;
+		}
+		public void AddEndpoint()
+		{
+			var d = new EndpointNode(this) { Name = $"Endpoint{Endpoints.Count + 1}" };
+			Endpoints.Add(d);
 			d.IsSelected = true;
 		}
 

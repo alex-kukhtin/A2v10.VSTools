@@ -23,11 +23,11 @@ namespace XamlEditor
 
 		private readonly static List<FieldNode> _defaultFields = new List<FieldNode>()
 		{
-			new FieldNode() { Name = "Id" },
-			new FieldNode() { Name = "Done" },
-			new FieldNode() { Name = "Date" },
-			new FieldNode() { Name = "Number" },
-			new FieldNode() { Name = "Memo" }
+			new FieldNode() { Name = "Id", Type= FieldType.Id },
+			new FieldNode() { Name = "Done", Type = FieldType.Boolean },
+			new FieldNode() { Name = "Date", Type = FieldType.Date },
+			new FieldNode() { Name = "Number", Length = 255 },
+			new FieldNode() { Name = "Memo", Length = 255 }
 		};
 	}
 

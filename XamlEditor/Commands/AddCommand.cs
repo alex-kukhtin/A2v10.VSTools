@@ -25,6 +25,9 @@ namespace XamlEditor
 				case "Document":
 					root.AddDocument();
 					break;
+				case "Endpoint":
+					root.AddEndpoint(); 
+					break;
 			}
 		}
 	}

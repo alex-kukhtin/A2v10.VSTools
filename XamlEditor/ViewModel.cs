@@ -1,8 +1,10 @@
 ﻿// Copyright © 2024 Oleksandr Kukhtin. All rights reserved.
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 using Newtonsoft.Json;
@@ -14,6 +16,10 @@ namespace XamlEditor
 		private AppNode _appNode = new AppNode() { Name = "Application" };
 		private String _path;
 		public ObservableCollection<AppNode> Root { get; } = new ObservableCollection<AppNode>();
+
+		public IEnumerable<String> RefTables =>
+			_appNode.Catalogs.Select(c => $"Catalog.{c.Name}")
+			.Union(_appNode.Documents.Select(d => $"Document.{d.Name}"));
 
 		public AppNode AppNode => _appNode;
 		public Boolean IsDirty => _appNode.IsDirty;

@@ -1,3 +1,7 @@
-1. Default Fields (static)
-3. Details Table
-4. Save/Load document
+
+4. Save document
+5. Endpoint name
+6. Details - Parent поле ссылка на тип
+7. Endpoint - UserInterface
+8. Menu ????
+9. 
