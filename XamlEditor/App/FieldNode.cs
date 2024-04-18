@@ -18,7 +18,7 @@ namespace XamlEditor
 		Float,
 		Money,
 		Guid,
-		Ref
+		Reference
 	}
 
 	public class FieldNode : BaseNode, IDataErrorInfo
@@ -45,7 +45,7 @@ namespace XamlEditor
 		[JsonIgnore]
 		public Boolean HasLength  => _type == FieldType.String;
 		[JsonIgnore]
-		public Boolean HasRef => _type == FieldType.Ref;
+		public Boolean HasRef => _type == FieldType.Reference;
 
 		#region IDataErrorInfo
 		[JsonIgnore]
