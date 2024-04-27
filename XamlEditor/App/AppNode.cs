@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -76,6 +76,18 @@ namespace XamlEditor
 				if (Documents.Contains(documentNode))
 					Documents.Remove(documentNode);
 		}
+
+		public TableNode FindNode(String table)
+		{
+			var c = Catalogs.FirstOrDefault(x => $"Catalog.{x.Name}" == table);
+			if (c != null) 
+				return c;
+			var d = Documents.First(x => $"Document.{x.Name}" == table);
+			if (d != null) 
+				return d;
+			return null;
+		}
+
 		private void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
 			IsDirty = true;
@@ -89,6 +101,13 @@ namespace XamlEditor
 				var x = JsonConvert.SerializeObject(this, JsonHelpers.DefaultSettings);
 				return x;
 			} 
+		}
+
+		internal override void OnInit()
+		{
+			base.OnInit();
+			foreach (var t in Endpoints)
+				t.OnInit(this);
 		}
 	}
 }

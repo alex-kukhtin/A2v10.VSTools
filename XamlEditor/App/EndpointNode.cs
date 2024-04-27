@@ -21,11 +21,23 @@ namespace XamlEditor
 		[JsonProperty(Order = 1)]
 		public String Table { get => _table; set { _table = value; OnPropertyChanged(); OnTableChanged(); } }
 
+		[JsonProperty(Order = 5)]
+		public UiNode UI { get; set; } = new UiNode();
+		public Boolean ShouldSerializeUI() => !UI.IsEmpty();
+
+		[JsonProperty(Order = 6)]
+		public Dictionary<String, String> Parameters { get; set; } = new Dictionary<String, String>();
+
 		private void OnTableChanged()
 		{
 			//_root.FindTable(Table);
 			if (Name.StartsWith("Endpoint"))
 				Name = Table;
+		}
+
+		internal void OnInit(AppNode root)
+		{
+			_root = root;
 		}
 	}
 

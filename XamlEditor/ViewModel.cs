@@ -36,6 +36,7 @@ namespace XamlEditor
 			Root.Remove(_appNode);
 			_appNode = JsonConvert.DeserializeObject<AppNode>(content, JsonHelpers.DefaultSettings);
 			Root.Add(_appNode);
+			_appNode.OnInit();
 			_appNode.IsSelected = true;
 		}
 		public void SaveDocument()

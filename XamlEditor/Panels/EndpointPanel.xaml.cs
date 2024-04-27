@@ -19,5 +19,9 @@ namespace XamlEditor
 		}
 
 		public IEnumerable<String> RefTables => _model.RefTables;
+
+		public UserInterfaceIndexPanel UiIndex => new UserInterfaceIndexPanel(_endpoint.UI.Index, _endpoint);
+		public UserInterfaceIndexPanel BrowseIndex => new UserInterfaceIndexPanel(_endpoint.UI.Browse, _endpoint);
+		public UserInterfaceEditPanel EditItem => new UserInterfaceEditPanel(_endpoint.UI.Edit, _endpoint);
 	}
 }

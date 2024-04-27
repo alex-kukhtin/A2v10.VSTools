@@ -23,11 +23,6 @@ namespace XamlEditor
 
 	public class FieldNode : BaseNode, IDataErrorInfo
 	{
-		private String _title;
-
-		[JsonProperty(Order = 1)]
-		public String Title { get => _title; set { _title = value; OnPropertyChanged(); } }
-
 		private FieldType _type;
 		[JsonProperty(Order = 4)]
 		public FieldType Type { get => _type; set { _type = value; OnPropertyChanged(String.Empty); } }
