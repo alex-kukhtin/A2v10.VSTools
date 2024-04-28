@@ -13,7 +13,10 @@ namespace XamlEditor
 		public ObservableCollection<UiFieldNode> Fields { get; set; } = new ObservableCollection<UiFieldNode>();
 		public Boolean ShouldSerializeFields() => Fields.Count > 0;
 
-		public Boolean IsEmpty()
+		[JsonIgnore]
+		public virtual Boolean IsDefault => IsEmpty();
+
+		public virtual Boolean IsEmpty()
 		{
 			return this.Fields.Count == 0;
 		}
@@ -28,7 +31,23 @@ namespace XamlEditor
 
 				foreach (var f in tableNode.Fields)
 					Fields.Add(new UiFieldNode() { Name = f.Name });
+
+				foreach (var f in Fields)
+					f.SetParent(_endpoint);
 			}
+			OnPropertyChanged(nameof(IsDefault));
+		}
+
+		protected EndpointNode _endpoint;
+		internal virtual void SetParent(EndpointNode endpoint) 
+		{
+			_endpoint = endpoint;
+			foreach (var f in Fields)
+				f.SetParent(endpoint);
+		}
+		internal virtual void OnTableChanged()
+		{
+
 		}
 	}
 }

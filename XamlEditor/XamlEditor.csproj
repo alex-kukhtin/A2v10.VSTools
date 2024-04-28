@@ -53,6 +53,7 @@
     <Compile Include="App\AppNode.cs" />
     <Compile Include="App\BaseNode.cs" />
     <Compile Include="App\BaseUiNode.cs" />
+    <Compile Include="App\DetailsUiNode.cs" />
     <Compile Include="App\EndpointNode.cs" />
     <Compile Include="App\DetailsNode.cs" />
     <Compile Include="App\DocumentNode.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="App\FieldNode.cs" />
     <Compile Include="App\EditUiNode.cs" />
     <Compile Include="App\IndexUiNode.cs" />
+    <Compile Include="App\MenuNode.cs" />
     <Compile Include="App\TableNode.cs" />
     <Compile Include="App\UiFieldNode.cs" />
     <Compile Include="App\UiNode.cs" />
@@ -78,6 +80,9 @@
     <Compile Include="Panels\EndpointPanel.xaml.cs">
       <DependentUpon>EndpointPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Panels\MenuPanel.xaml.cs">
+      <DependentUpon>MenuPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\TablePanel.xaml.cs">
       <DependentUpon>TablePanel.xaml</DependentUpon>
     </Compile>
@@ -89,6 +94,9 @@
     </Compile>
     <Compile Include="Panels\UserInteraceIndexPanel.xaml.cs">
       <DependentUpon>UserInteraceIndexPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\UserInterfaceDetailsPanel.xaml.cs">
+      <DependentUpon>UserInterfaceDetailsPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MetadataEditorControl.xaml.cs">
@@ -114,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Panels\MenuPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Panels\TablePanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,6 +139,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Panels\UserInteraceIndexPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\UserInterfaceDetailsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

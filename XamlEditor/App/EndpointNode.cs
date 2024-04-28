@@ -21,6 +21,10 @@ namespace XamlEditor
 		[JsonProperty(Order = 1)]
 		public String Table { get => _table; set { _table = value; OnPropertyChanged(); OnTableChanged(); } }
 
+		private String _title;
+		[JsonProperty(Order = 2)]
+		public String Title { get => _title; set { _title = value; OnPropertyChanged(); OnTableChanged(); } }
+
 		[JsonProperty(Order = 5)]
 		public UiNode UI { get; set; } = new UiNode();
 		public Boolean ShouldSerializeUI() => !UI.IsEmpty();
@@ -30,14 +34,29 @@ namespace XamlEditor
 
 		private void OnTableChanged()
 		{
-			//_root.FindTable(Table);
 			if (Name.StartsWith("Endpoint"))
 				Name = Table;
+			OnPropertyChanged(String.Empty);
+			UI.OnTableChanged();
 		}
 
 		internal void OnInit(AppNode root)
 		{
 			_root = root;
+			UI.SetParent(this);
+		}
+
+		internal FieldNode FindField(String Name)
+		{
+			var table = _root.FindNode(Table);
+			return table.FindField(Name);
+		}
+
+		internal TableNode GetTable()
+		{
+			if (String.IsNullOrEmpty(Table))
+				return null;
+			return _root.FindNode(Table);
 		}
 	}
 

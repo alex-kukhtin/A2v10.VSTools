@@ -42,7 +42,7 @@
 						<ColumnDefinition Width="31"/>
 						<ColumnDefinition Width="100"/>
 						<ColumnDefinition Width="100"/>
-						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="70"/>
 						<ColumnDefinition Width="150"/>
 					</Grid.ColumnDefinitions>
 					<Button Grid.Column="0" Content="+" Width="25"
@@ -60,7 +60,7 @@
 									<ColumnDefinition Width="31"/>
 									<ColumnDefinition Width="100"/>
 									<ColumnDefinition Width="100"/>
-									<ColumnDefinition Width="100"/>
+									<ColumnDefinition Width="70"/>
 									<ColumnDefinition Width="150"/>
 								</Grid.ColumnDefinitions>
 								<TextBox Grid.Column="1" Text="{Binding Name}" IsEnabled="False"/>
@@ -82,7 +82,7 @@
 									<ColumnDefinition Width="31"/>
 									<ColumnDefinition Width="100"/>
 									<ColumnDefinition Width="100"/>
-									<ColumnDefinition Width="100"/>
+									<ColumnDefinition Width="70"/>
 									<ColumnDefinition Width="150"/>
 								</Grid.ColumnDefinitions>
 								<StackPanel Grid.Column="0" Orientation="Horizontal" Margin="3">

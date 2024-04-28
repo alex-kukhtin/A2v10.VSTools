@@ -1,7 +1,8 @@
 
 4. Save document
-5. Endpoint name
-6. Details - Parent поле ссылка на тип
-7. Endpoint - UserInterface
 8. Menu ????
-9. 
+10. UI Fields: Name from combobox
+11. UI Fields: Display Name from combobox
+12. Endpoint Parameters
+13. Default UI для разных элементов
+14. UiField - зависимости разрешений полей

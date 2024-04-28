@@ -43,6 +43,7 @@ namespace XamlEditor
 				yield return new CatalogsNode(Catalogs);
 				yield return new DocumentsNode(Documents);
 				yield return new EndpointsNode(Endpoints);
+				yield return new MenuNode() { Name = "Menu" };
 			}
 		}
 
@@ -52,6 +53,7 @@ namespace XamlEditor
 			c.ApplyDefaults();
 			Catalogs.Add(c);
 			c.IsSelected = true;
+			c.OnInit();
 		}
 		public void AddDocument()
 		{
@@ -59,12 +61,14 @@ namespace XamlEditor
 			d.ApplyDefaults();
 			Documents.Add(d);
 			d.IsSelected = true;
+			d.OnInit();
 		}
 		public void AddEndpoint()
 		{
 			var d = new EndpointNode(this) { Name = $"Endpoint{Endpoints.Count + 1}" };
 			Endpoints.Add(d);
 			d.IsSelected = true;
+			d.OnInit(this);
 		}
 
 		public void DeleteTable(TableNode table)
@@ -79,6 +83,8 @@ namespace XamlEditor
 
 		public TableNode FindNode(String table)
 		{
+			if (String.IsNullOrEmpty(table))
+				return null;
 			var c = Catalogs.FirstOrDefault(x => $"Catalog.{x.Name}" == table);
 			if (c != null) 
 				return c;

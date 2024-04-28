@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace XamlEditor
@@ -61,5 +61,8 @@ namespace XamlEditor
 			Details.Add(details);
 			details.IsSelected = true;
 		}
+
+		public FieldNode FindField(String Name)  =>
+			Fields.FirstOrDefault(f => f.Name == Name);
 	}
 }

@@ -5,45 +5,74 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:XamlEditor"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Margin="0,12,0,0">
+             d:DesignHeight="450" d:DesignWidth="800" Margin="6,12,6,6"
+			 Height="Auto">
+	<UserControl.Resources>
+		<local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+	</UserControl.Resources>
     <StackPanel>
 		<CheckBox Content="Default" Checked ="CheckBox_Checked" 
 				  Unchecked="CheckBox_Checked" x:Name="DefaultCheckBox"
-				  HorizontalAlignment="Left"/>
-		<TextBlock Text="{Binding Name}"></TextBlock>
-		<Expander Header="Fields" IsExpanded="True" Margin="0,18,0,0">
+				  HorizontalAlignment="Left" Margin="2,0,0,0"/>
+		<Expander Header="Fields" IsExpanded="True" Padding="0" Margin="0,12,0,0" Visibility="{Binding IsDefault, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter='Invert'}">
 			<StackPanel Margin="0,6,0,0">
 				<Grid>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="31"/>
+						<ColumnDefinition Width="83"/>
 						<ColumnDefinition Width="100"/>
 						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="40"/>
+						<ColumnDefinition Width="65"/>
+						<ColumnDefinition Width="40"/>
+						<ColumnDefinition Width="45"/>
+						<ColumnDefinition Width="40"/>
 						<ColumnDefinition Width="100"/>
-						<ColumnDefinition Width="150"/>
 					</Grid.ColumnDefinitions>
-					<Button Grid.Column="0" Content="+" Width="25"
-							Click="AddField_Click"/>
+					<Button Grid.Column="0" Content="+" Margin="3" Padding="3"
+							Click="AddField_Click" />
 					<Label Grid.Column="1" Content="Name" />
 					<Label Grid.Column="2" Content="Title" />
-					<Label Grid.Column="3" Content="Length" />
-					<Label Grid.Column="4" Content="Reference" />
+					<Label Grid.Column="3" Content="Sort" HorizontalAlignment="Center"/>
+					<Label Grid.Column="4" Content="Search" />
+					<Label Grid.Column="5" Content="Fit" HorizontalAlignment="Center" />
+					<Label Grid.Column="6" Content="Clamp" />
+					<Label Grid.Column="7" Content="Filter" HorizontalAlignment="Center"/>
+					<Label Grid.Column="8" Content="Display" />
 				</Grid>
 				<ItemsControl ItemsSource="{Binding Fields}">
 					<ItemsControl.ItemTemplate>
 						<DataTemplate>
 							<Grid>
 								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="31"/>
+									<ColumnDefinition Width="83"/>
 									<ColumnDefinition Width="100"/>
 									<ColumnDefinition Width="100"/>
+									<ColumnDefinition Width="40"/>
+									<ColumnDefinition Width="65"/>
+									<ColumnDefinition Width="40"/>
+									<ColumnDefinition Width="45"/>
+									<ColumnDefinition Width="40"/>
 									<ColumnDefinition Width="100"/>
-									<ColumnDefinition Width="150"/>
 								</Grid.ColumnDefinitions>
 								<StackPanel Grid.Column="0" Orientation="Horizontal" Margin="3">
+									<Button Content="↑" Width="25" Margin="0,0,1,0"
+											Click="FieldUp_Click" CommandParameter="{Binding}"/>
+									<Button Content="↓" Width="25" Margin="0,0,1,0"
+											Click="FieldDown_Click" CommandParameter="{Binding}"/>
 									<Button Content="×" Width="25" Click="DeleteField_Click" CommandParameter="{Binding}"/>
 								</StackPanel>
 								<TextBox Grid.Column="1" Text="{Binding Name}" />
 								<TextBox Grid.Column="2" Text="{Binding Title}" />
+								<CheckBox Grid.Column="3" IsChecked="{Binding Sort}" HorizontalAlignment="Center"/>
+
+								<ComboBox Grid.Column="4" 
+											ItemsSource="{Binding Source={local:EnumBindingSource {x:Type local:SearchType}}}"
+											SelectedValue="{Binding Search}" />
+
+								<CheckBox Grid.Column="5" IsChecked="{Binding Fit}" HorizontalAlignment="Center"/>
+								<TextBox Grid.Column="6" Text="{Binding Clamp}" TextAlignment="Right" />
+								<CheckBox Grid.Column="7" IsChecked="{Binding Filter}" HorizontalAlignment="Center"/>
+								<TextBox Grid.Column="8" Text="{Binding Display}" Visibility="{Binding IsDisplayVisible}" />
 							</Grid>
 						</DataTemplate>
 					</ItemsControl.ItemTemplate>

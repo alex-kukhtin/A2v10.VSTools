@@ -19,6 +19,8 @@ namespace XamlEditor
 				return new DetailsPanel(detailsNode, vm);
 			else if (values[0] is TableNode tableNode)
 				return new TablePanel(tableNode, vm);
+			else if (values[0] is MenuNode menuNode)
+				return new MenuPanel(menuNode, vm);
 			return null;
 		}
 

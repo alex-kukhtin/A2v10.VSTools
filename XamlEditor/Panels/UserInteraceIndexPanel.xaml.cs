@@ -37,5 +37,24 @@ namespace XamlEditor
 				return;
 			_baseNode.SetDefault(checkBox.IsChecked == true ? null : _root.FindNode(_endpoint.Table));
 		}
+		private void FieldUp_Click(object sender, RoutedEventArgs e)
+		{
+			if (!(e.Source is Button btnObj) || !(btnObj.CommandParameter is UiFieldNode fn))
+				return;
+			int pos = _baseNode.Fields.IndexOf(fn);
+			if (pos < 1)
+				return;
+			_baseNode.Fields.Move(pos, pos - 1);
+		}
+
+		private void FieldDown_Click(object sender, RoutedEventArgs e)
+		{
+			if (!(e.Source is Button btnObj) || !(btnObj.CommandParameter is UiFieldNode fn))
+				return;
+			int pos = _baseNode.Fields.IndexOf(fn);
+			if (pos >= _baseNode.Fields.Count - 1)
+				return;
+			_baseNode.Fields.Move(pos, pos + 1);
+		}
 	}
 }
