@@ -35,12 +35,19 @@ namespace XamlEditor
 		private String _ref;
 		[JsonProperty(Order = 6)]
 		public String Ref { get => _ref; set { _ref = value; OnPropertyChanged(); } }
-		public Boolean ShouldSerializeRef() => HasRef;
+		public Boolean ShouldSerializeRef() => IsReference;
 
 		[JsonIgnore]
 		public Boolean HasLength  => _type == FieldType.String;
 		[JsonIgnore]
-		public Boolean HasRef => _type == FieldType.Reference;
+		public Boolean IsReference => _type == FieldType.Reference;
+
+		[JsonIgnore]
+		public Boolean CanSort => _type != FieldType.Reference;
+		[JsonIgnore]
+		public Boolean CanSearch => _type != FieldType.Reference;
+		[JsonIgnore]
+		public Boolean HasClamp => _type == FieldType.String && Length >= Constants.ClampThreshold;
 
 		#region IDataErrorInfo
 		[JsonIgnore]

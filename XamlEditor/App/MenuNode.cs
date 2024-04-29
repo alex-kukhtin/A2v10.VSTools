@@ -3,6 +3,6 @@ namespace XamlEditor
 {
 	public class MenuNode : BaseNode
 	{
-		protected override string ImageName => "Table";
+		protected override string ImageName => "MainMenuControl";
 	}
 }

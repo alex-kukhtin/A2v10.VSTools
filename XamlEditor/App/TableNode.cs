@@ -62,7 +62,11 @@ namespace XamlEditor
 			details.IsSelected = true;
 		}
 
-		public FieldNode FindField(String Name)  =>
-			Fields.FirstOrDefault(f => f.Name == Name);
+		public FieldNode FindField(String Name) {
+			var r = Fields.FirstOrDefault(f => f.Name == Name);
+			if (r != null)
+				return r;
+			return DefaultFields.FirstOrDefault(f => f.Name == Name);
+		}
 	}
 }

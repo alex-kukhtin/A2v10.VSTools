@@ -43,6 +43,35 @@
 			</Grid>
 		</Expander>
 		<Expander Header="Parameters" IsExpanded="True" Margin="0,18,0,0">
+			<StackPanel Margin="0,6,0,0">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="31"/>
+						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="100"/>
+					</Grid.ColumnDefinitions>
+					<Button Grid.Column="0" Content="+" Width="25" Margin="3" Padding="3"
+							Click="AddParameter_Click"/>
+					<Label Grid.Column="1" Content="Name"/>
+					<Label Grid.Column="2" Content="Value"/>
+				</Grid>
+				<ItemsControl ItemsSource="{Binding ParametersList}">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="31"/>
+									<ColumnDefinition Width="100"/>
+									<ColumnDefinition Width="100"/>
+								</Grid.ColumnDefinitions>
+								<Button Grid.Column="0" Content="×" Width="25" Click="DeleteParameter_Click" CommandParameter="{Binding}" Margin="3"/>
+								<TextBox Grid.Column="1" Text="{Binding Key, Mode=TwoWay}" />
+								<TextBox Grid.Column="2" Text="{Binding Value, Mode=TwoWay}" />
+							</Grid>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</StackPanel>
 		</Expander>
 		<Expander Header="User Interface" IsExpanded="True" Margin="0,18,0,0">
 			<TabControl Margin="0, 10">
@@ -50,10 +79,12 @@
 					<ContentControl Content="{Binding UiIndex, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
 				</TabItem>
 				<TabItem Header="Browse Item">
-					<ContentControl Content="{Binding BrowseIndex, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+					<ContentControl Content="{Binding BrowseIndex, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+							MinHeight="0" Height="Auto"/>
 				</TabItem>
 				<TabItem Header="Edit Item">
-					<ContentControl Content="{Binding EditItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+					<ContentControl Content="{Binding EditItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
+							MinHeight="0" Height="Auto"/>
 				</TabItem>
 			</TabControl>
 		</Expander>

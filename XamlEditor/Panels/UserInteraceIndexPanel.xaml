@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:XamlEditor"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Margin="6,12,6,6"
-			 Height="Auto">
+			 Height="Auto" MinHeight="50">
 	<UserControl.Resources>
 		<local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 	</UserControl.Resources>
@@ -14,7 +14,8 @@
 		<CheckBox Content="Default" Checked ="CheckBox_Checked" 
 				  Unchecked="CheckBox_Checked" x:Name="DefaultCheckBox"
 				  HorizontalAlignment="Left" Margin="2,0,0,0"/>
-		<Expander Header="Fields" IsExpanded="True" Padding="0" Margin="0,12,0,0" Visibility="{Binding IsDefault, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter='Invert'}">
+		<Expander Header="Fields" IsExpanded="True" Padding="0" Margin="0,12,0,0" 
+				  Visibility="{Binding IsDefault, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter='Invert'}">
 			<StackPanel Margin="0,6,0,0">
 				<Grid>
 					<Grid.ColumnDefinitions>
@@ -63,16 +64,18 @@
 								</StackPanel>
 								<TextBox Grid.Column="1" Text="{Binding Name}" />
 								<TextBox Grid.Column="2" Text="{Binding Title}" />
-								<CheckBox Grid.Column="3" IsChecked="{Binding Sort}" HorizontalAlignment="Center"/>
+								<CheckBox Grid.Column="3" IsChecked="{Binding Sort}" HorizontalAlignment="Center" IsEnabled="{Binding CanSort}"/>
 
-								<ComboBox Grid.Column="4" 
+								<ComboBox Grid.Column="4" IsEnabled="{Binding CanSearch}"
 											ItemsSource="{Binding Source={local:EnumBindingSource {x:Type local:SearchType}}}"
 											SelectedValue="{Binding Search}" />
 
 								<CheckBox Grid.Column="5" IsChecked="{Binding Fit}" HorizontalAlignment="Center"/>
-								<TextBox Grid.Column="6" Text="{Binding Clamp}" TextAlignment="Right" />
-								<CheckBox Grid.Column="7" IsChecked="{Binding Filter}" HorizontalAlignment="Center"/>
-								<TextBox Grid.Column="8" Text="{Binding Display}" Visibility="{Binding IsDisplayVisible}" />
+								<TextBox Grid.Column="6" Text="{Binding Clamp}" TextAlignment="Right" 
+										 Visibility="{Binding HasClamp, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+								<CheckBox Grid.Column="7" IsChecked="{Binding Filter}" HorizontalAlignment="Center"
+										  Visibility="{Binding IsReference, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+								<TextBox Grid.Column="8" Text="{Binding Display}" Visibility="{Binding IsReference, Converter={StaticResource BooleanToVisibilityConverter}}" />
 							</Grid>
 						</DataTemplate>
 					</ItemsControl.ItemTemplate>

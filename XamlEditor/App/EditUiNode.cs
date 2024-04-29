@@ -1,9 +1,10 @@
 ﻿// Copyright © 2024 Oleksandr Kukhtin. All rights reserved.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+
+using Newtonsoft.Json;
 
 namespace XamlEditor
 {
@@ -11,6 +12,18 @@ namespace XamlEditor
 	{
 		public String Name { get; set; }
 		public ObservableCollection<DetailsUiNode> Details { get; set; } = new ObservableCollection<DetailsUiNode>();
+
+		[JsonIgnore]
+		public Boolean HasDetails {
+			get {
+				if (_endpoint == null)
+					return false;
+				var table = _endpoint.GetTable();
+				if (table == null) 
+					return false;
+				return table.Details.Count > 0;
+			} 
+		}
 		public void CreateDetails()
 		{
 			if (_endpoint == null)
@@ -41,7 +54,8 @@ namespace XamlEditor
 		internal override void OnTableChanged()
 		{
 			base.OnTableChanged();
-			CreateDetails();	
+			CreateDetails();
+			OnPropertyChanged(String.Empty);
 		}
 	}
 }

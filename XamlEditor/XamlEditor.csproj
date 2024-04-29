@@ -53,6 +53,7 @@
     <Compile Include="App\AppNode.cs" />
     <Compile Include="App\BaseNode.cs" />
     <Compile Include="App\BaseUiNode.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="App\DetailsUiNode.cs" />
     <Compile Include="App\EndpointNode.cs" />
     <Compile Include="App\DetailsNode.cs" />
@@ -170,6 +171,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\NewDocument.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MainMenuControl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\EntryPoint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\WriteToHistory.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

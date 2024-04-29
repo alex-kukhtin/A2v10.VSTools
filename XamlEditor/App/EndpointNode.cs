@@ -3,11 +3,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
 using Newtonsoft.Json;
 
 namespace XamlEditor
 {
+	public class KeyValue : ObservableNode
+	{
+		public String Key { get; set; }
+		public String Value { get; set; }
+	}
 	public class EndpointNode : BaseNode
 	{
 		public EndpointNode(AppNode root) 
@@ -15,7 +19,7 @@ namespace XamlEditor
 			_root = root;
 		}
 		[JsonIgnore]
-		protected override String ImageName => "NewDocument";
+		protected override String ImageName => "EntryPoint";
 
 		private String _table;
 		[JsonProperty(Order = 1)]
@@ -29,8 +33,29 @@ namespace XamlEditor
 		public UiNode UI { get; set; } = new UiNode();
 		public Boolean ShouldSerializeUI() => !UI.IsEmpty();
 
+		private readonly ObservableCollection<KeyValue> _parameters = new ObservableCollection<KeyValue>();
+
+		[JsonIgnore]
+		public ObservableCollection<KeyValue> ParametersList => _parameters;
+
 		[JsonProperty(Order = 6)]
-		public Dictionary<String, String> Parameters { get; set; } = new Dictionary<String, String>();
+		public Dictionary<String, String> Parameters
+		{
+			get
+			{
+				var dict = new Dictionary<String, String>();	
+				foreach (var kvp in  _parameters)	
+					dict.Add(kvp.Key, kvp.Value);	
+				return dict;
+			}
+			set
+			{
+				_parameters.Clear();
+				foreach (var kvp in value)
+					_parameters.Add(new KeyValue() { Key = kvp.Key, Value = kvp.Value});
+			}
+		}
+		public Boolean ShouldSerializeParameters() => ParametersList.Count > 0;
 
 		private void OnTableChanged()
 		{

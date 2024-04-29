@@ -14,7 +14,7 @@ namespace XamlEditor
 		public Boolean ShouldSerializeFields() => Fields.Count > 0;
 
 		[JsonIgnore]
-		public virtual Boolean IsDefault => IsEmpty();
+		public virtual Boolean IsDefault => this.Fields.Count == 0; // NOT IsEmpty!
 
 		public virtual Boolean IsEmpty()
 		{

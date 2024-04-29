@@ -64,9 +64,12 @@ namespace XamlEditor
 		#endregion
 
 		EndpointNode _endpoint;
+		FieldNode _baseField;
+
 		internal void SetParent(EndpointNode endpoint)
 		{
 			_endpoint = endpoint;
+			_baseField = _endpoint.FindField(Name);
 		}
 
 		[JsonIgnore]
@@ -75,8 +78,20 @@ namespace XamlEditor
 			get
 			{
 				FieldNode baseNode = _endpoint.FindField(Name);
-				return baseNode != null && baseNode.HasRef ? Visibility.Visible : Visibility.Hidden;	
+				return baseNode != null && baseNode.IsReference ? Visibility.Visible : Visibility.Hidden;	
 			}
 		}
+
+		[JsonIgnore]
+		public Boolean CanSort => _baseField != null && _baseField.CanSort;
+
+		[JsonIgnore]
+		public Boolean CanSearch => _baseField != null && _baseField.CanSearch;
+
+		[JsonIgnore]
+		public Boolean IsReference => _baseField != null && _baseField.IsReference;
+
+		[JsonIgnore]
+		public Boolean HasClamp => _baseField != null && _baseField.HasClamp;
 	}
 }

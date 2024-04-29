@@ -30,6 +30,7 @@ namespace XamlEditor
 				foreach (var f in Fields)
 					f.SetParent(_endpoint);
 			}
+			OnPropertyChanged(nameof(IsDefault));
 		}
 	}
 }
