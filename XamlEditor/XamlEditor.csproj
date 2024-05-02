@@ -53,6 +53,7 @@
     <Compile Include="App\AppNode.cs" />
     <Compile Include="App\BaseNode.cs" />
     <Compile Include="App\BaseUiNode.cs" />
+    <Compile Include="App\JournalNode.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="App\DetailsUiNode.cs" />
     <Compile Include="App\EndpointNode.cs" />
@@ -95,6 +96,9 @@
     </Compile>
     <Compile Include="Panels\UserInteraceIndexPanel.xaml.cs">
       <DependentUpon>UserInteraceIndexPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\UserInterfaceApplyPanel.xaml.cs">
+      <DependentUpon>UserInterfaceApplyPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Panels\UserInterfaceDetailsPanel.xaml.cs">
       <DependentUpon>UserInterfaceDetailsPanel.xaml</DependentUpon>
@@ -143,6 +147,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Panels\UserInterfaceApplyPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Panels\UserInterfaceDetailsPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,7 +187,7 @@
     <Resource Include="Images\EntryPoint.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\WriteToHistory.png" />
+    <Resource Include="Images\Journal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

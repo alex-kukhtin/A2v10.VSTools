@@ -32,6 +32,10 @@ namespace XamlEditor
 		public Boolean ShouldSerializeDocuments() => Documents != null && Documents.Count > 0;
 
 		[JsonProperty(Order = 13)]
+		public ObservableCollection<JournalNode> Journals { get; set; } = new ObservableCollection<JournalNode>();
+		public Boolean ShouldSerializeJournal() => Journals != null && Journals.Count > 0;
+
+		[JsonProperty(Order = 14)]
 		public ObservableCollection<EndpointNode> Endpoints { get; set; } = new ObservableCollection<EndpointNode>();
 		public Boolean ShouldSerializeEndpoints() => Endpoints != null && Endpoints.Count > 0;
 
@@ -42,6 +46,7 @@ namespace XamlEditor
 			{
 				yield return new CatalogsNode(Catalogs);
 				yield return new DocumentsNode(Documents);
+				yield return new JournalsNode(Journals);
 				yield return new EndpointsNode(Endpoints);
 				yield return new MenuNode() { Name = "Menu" };
 			}
@@ -63,6 +68,14 @@ namespace XamlEditor
 			d.IsSelected = true;
 			d.OnInit();
 		}
+		public void AddJournal()
+		{
+			var j = new JournalNode(this) { Name = $"Journal{Journals.Count + 1}" };
+			j.ApplyDefaults();
+			Journals.Add(j);
+			j.IsSelected = true;
+			j.OnInit();
+		}
 		public void AddEndpoint()
 		{
 			var d = new EndpointNode(this) { Name = $"Endpoint{Endpoints.Count + 1}" };
@@ -79,6 +92,9 @@ namespace XamlEditor
 			else if (table is DocumentNode documentNode)
 				if (Documents.Contains(documentNode))
 					Documents.Remove(documentNode);
+			else if (table is JournalNode journalNode)
+				if (Journals.Contains(journalNode))
+					Journals.Remove(journalNode);
 		}
 
 		public TableNode FindNode(String table)

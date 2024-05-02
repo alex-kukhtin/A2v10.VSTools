@@ -24,6 +24,7 @@ namespace XamlEditor
 		public UserInterfaceIndexPanel UiIndex => new UserInterfaceIndexPanel(_endpoint.UI.Index, _endpoint);
 		public UserInterfaceIndexPanel BrowseIndex => new UserInterfaceIndexPanel(_endpoint.UI.Browse, _endpoint);
 		public UserInterfaceEditPanel EditItem => new UserInterfaceEditPanel(_endpoint.UI.Edit, _endpoint);
+		public UserInterfaceApplyPanel ApplyPanel => new UserInterfaceApplyPanel(_endpoint);
 
 		private void AddParameter_Click(object sender, RoutedEventArgs e)
 		{

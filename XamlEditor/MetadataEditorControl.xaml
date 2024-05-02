@@ -21,6 +21,11 @@
 							<Image Source="/XamlEditor;Component/Images/Document.png"/>
 						</MenuItem.Icon>
 					</MenuItem>
+					<MenuItem Header="Journal" Command="{Binding AddCommand}" CommandParameter="Journal">
+						<MenuItem.Icon>
+							<Image Source="/XamlEditor;Component/Images/Journal.png"/>
+						</MenuItem.Icon>
+					</MenuItem>
 					<Separator />
 					<MenuItem Header="Details"
 							  Command="{Binding AddDetailsCommand}">
@@ -67,6 +72,11 @@
 					<MenuItem Header="Document" Command="{Binding AddCommand}" CommandParameter="Document">
 						<MenuItem.Icon>
 							<Image Source="/XamlEditor;Component/Images/Document.png"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Journal" Command="{Binding AddCommand}" CommandParameter="Journal">
+						<MenuItem.Icon>
+							<Image Source="/XamlEditor;Component/Images/Journal.png"/>
 						</MenuItem.Icon>
 					</MenuItem>
 					<MenuItem Header="Endpoint" Command="{Binding AddCommand}" CommandParameter="Endpoint">
