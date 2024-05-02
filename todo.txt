@@ -5,9 +5,6 @@
 11. UI Fields: Display Name from combobox
 13. Default UI для разных элементов
 14. UiField - зависимости разрешений полей
-15. EditItem - если для Details IsDefault = false, то 
-	почему-то не работает IsDefault для основного Edit
-16. Journals ?
 17. EditUI. Fields - Add/Remove/Move
 18. Table.Fields - неправильно работает комбик IsReference
 19. 

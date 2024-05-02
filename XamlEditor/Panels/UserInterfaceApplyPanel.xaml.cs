@@ -2,15 +2,14 @@
 
 using System.Windows.Controls;
 
-namespace XamlEditor
+namespace XamlEditor;
+
+public partial class UserInterfaceApplyPanel : UserControl
 {
-	public partial class UserInterfaceApplyPanel : UserControl
+	private readonly EndpointNode _endpoint;
+	public UserInterfaceApplyPanel(EndpointNode endpoint)
 	{
-		private readonly EndpointNode _endpoint;
-		public UserInterfaceApplyPanel(EndpointNode endpoint)
-		{
-			_endpoint = endpoint;	
-			InitializeComponent();
-		}
+		_endpoint = endpoint;	
+		InitializeComponent();
 	}
 }
