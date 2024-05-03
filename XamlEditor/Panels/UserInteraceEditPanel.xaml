@@ -21,36 +21,46 @@
 			<StackPanel Margin="0,6,0,0">
 				<Grid>
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="31"/>
+						<ColumnDefinition Width="83"/>
 						<ColumnDefinition Width="100"/>
 						<ColumnDefinition Width="100"/>
 						<ColumnDefinition Width="60"/>
 						<ColumnDefinition Width="60"/>
+						<ColumnDefinition Width="200"/>
 					</Grid.ColumnDefinitions>
-					<Button Grid.Column="0" Content="+" Width="25"
+					<Button Grid.Column="0" Content="+" Margin="3" Padding="3"
 							Click="AddField_Click"/>
 					<Label Grid.Column="1" Content="Name" />
 					<Label Grid.Column="2" Content="Title" />
 					<Label Grid.Column="3" Content="Multiline" HorizontalAlignment="Center"/>
 					<Label Grid.Column="4" Content="Required" HorizontalAlignment="Center"/>
+					<Label Grid.Column="5" Content="Computed" />
 				</Grid>
 				<ItemsControl ItemsSource="{Binding Fields}">
 					<ItemsControl.ItemTemplate>
 						<DataTemplate>
 							<Grid>
 								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="31"/>
+									<ColumnDefinition Width="83"/>
 									<ColumnDefinition Width="100"/>
 									<ColumnDefinition Width="100"/>
 									<ColumnDefinition Width="60"/>
 									<ColumnDefinition Width="60"/>
+									<ColumnDefinition Width="200"/>
 								</Grid.ColumnDefinitions>
 								<StackPanel Grid.Column="0" Orientation="Horizontal" Margin="3">
+									<Button Content="↑" Width="25" Margin="0,0,1,0"
+											Click="FieldUp_Click" CommandParameter="{Binding}"/>
+									<Button Content="↓" Width="25" Margin="0,0,1,0"
+											Click="FieldDown_Click" CommandParameter="{Binding}"/>
 									<Button Content="×" Width="25" Click="DeleteField_Click" CommandParameter="{Binding}"/>
 								</StackPanel>
 								<TextBox Grid.Column="1" Text="{Binding Name}" />
 								<TextBox Grid.Column="2" Text="{Binding Title}" />
-								<CheckBox Grid.Column="3" IsChecked="{Binding Mulitline}" HorizontalAlignment="Center"/>
+								<CheckBox Grid.Column="3" IsChecked="{Binding Multiline}" HorizontalAlignment="Center"/>
+								<CheckBox Grid.Column="4" IsChecked="{Binding Required}" HorizontalAlignment="Center"/>
+								<TextBox Grid.Column="5" Text="{Binding Computed}" 
+										 FontFamily="Consolas"/>
 							</Grid>
 						</DataTemplate>
 					</ItemsControl.ItemTemplate>

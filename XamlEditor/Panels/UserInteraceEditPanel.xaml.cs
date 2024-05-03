@@ -37,4 +37,24 @@ public partial class UserInterfaceEditPanel : UserControl
 			return;
 		_baseNode.SetDefault(checkBox.IsChecked == true ? null : _root.FindNode(_endpoint.Table));
 	}
+
+	private void FieldUp_Click(object sender, RoutedEventArgs e)
+	{
+		if (e.Source is not Button btnObj || btnObj.CommandParameter is not UiFieldNode fn)
+			return;
+		int pos = _baseNode.Fields.IndexOf(fn);
+		if (pos < 1)
+			return;
+		_baseNode.Fields.Move(pos, pos - 1);
+	}
+
+	private void FieldDown_Click(object sender, RoutedEventArgs e)
+	{
+		if (e.Source is not Button btnObj || btnObj.CommandParameter is not UiFieldNode fn)
+			return;
+		int pos = _baseNode.Fields.IndexOf(fn);
+		if (pos >= _baseNode.Fields.Count - 1)
+			return;
+		_baseNode.Fields.Move(pos, pos + 1);
+	}
 }

@@ -33,7 +33,7 @@ namespace XamlEditor
 		public UiNode UI { get; set; } = new UiNode();
 		public Boolean ShouldSerializeUI() => !UI.IsEmpty();
 
-		private readonly ObservableCollection<KeyValue> _parameters = new ObservableCollection<KeyValue>();
+		private readonly ObservableCollection<KeyValue> _parameters = [];
 
 		[JsonIgnore]
 		public ObservableCollection<KeyValue> ParametersList => _parameters;
@@ -82,6 +82,11 @@ namespace XamlEditor
 			if (String.IsNullOrEmpty(Table))
 				return null;
 			return _root.FindNode(Table);
+		}
+
+		internal TableNode FindTable(String name)
+		{
+			return _root.FindNode(name);
 		}
 	}
 

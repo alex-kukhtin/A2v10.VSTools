@@ -22,11 +22,11 @@ namespace XamlEditor
 	public class TableNode : BaseNode
 	{
 		[JsonProperty(Order = 2)]
-		public ObservableCollection<FieldNode> Fields { get; set; } = new ObservableCollection<FieldNode>();
+		public ObservableCollection<FieldNode> Fields { get; set; } = [];
 		public Boolean ShouldSerializeFields() => Fields != null && Fields.Count > 0;
 
 		[JsonProperty(Order = 3)]
-		public ObservableCollection<DetailsNode> Details { get; set; } = new ObservableCollection<DetailsNode>();
+		public ObservableCollection<DetailsNode> Details { get; set; } = [];
 		public Boolean ShouldSerializeDetails() => Details != null && Details.Count > 0;
 
 		[JsonIgnore]
@@ -60,6 +60,11 @@ namespace XamlEditor
 			var details = new DetailsNode(_root, this) { Name = $"Details{Details.Count + 1}" };
 			Details.Add(details);
 			details.IsSelected = true;
+		}
+
+		public DetailsNode FindDetails(String name)
+		{
+			return Details.FirstOrDefault(dd => dd.Name == name);
 		}
 
 		public FieldNode FindField(String Name) {

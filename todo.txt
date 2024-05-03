@@ -5,6 +5,6 @@
 11. UI Fields: Display Name from combobox
 13. Default UI дл€ разных элементов
 14. UiField - зависимости разрешений полей
-17. EditUI. Fields - Add/Remove/Move
+17. EditUI. Fields - Add
 18. Table.Fields - неправильно работает комбик IsReference
-19. 
+19. «аменить в индексе Unit (Display = Short) на Unit.Short

@@ -63,6 +63,23 @@ namespace XamlEditor
 		public String Display { get => _display; set { _display = value; OnPropertyChanged(); } }
 		#endregion
 
+		private Boolean _required;
+		[JsonProperty(Order = 9)]
+		public Boolean Required { get => _required; set { _required = value; OnPropertyChanged(); } }
+
+		private String _computed;
+		[JsonProperty(Order = 10)]
+		public String Computed { get => _computed; set { _computed = value; OnPropertyChanged(); } }
+
+		private Boolean _total;
+		[JsonProperty(Order = 11)]
+		public Boolean Total { get => _total; set { _total = value; OnPropertyChanged(); } }
+
+		private String _width;
+		[JsonProperty(Order = 12)]
+		public String Width { get => _width; set { _width = value; OnPropertyChanged(); } }
+
+
 		EndpointNode _endpoint;
 		FieldNode _baseField;
 
