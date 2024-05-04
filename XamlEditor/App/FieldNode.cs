@@ -54,7 +54,14 @@ namespace XamlEditor
 		public String Error => throw new NotImplementedException();
 
 		[JsonIgnore]
-		public String this[String columnName] => String.Empty;
+		public String this[String columnName] {
+			get
+			{
+				if (columnName == "Ref")
+					return String.IsNullOrEmpty(Ref) ? "Required" : String.Empty;
+				return String.Empty;
+			}
+		}
 		#endregion
 	}
 }

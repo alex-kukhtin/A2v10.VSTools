@@ -1,9 +1,10 @@
 ﻿// Copyright © 2024 Oleksandr Kukhtin. All rights reserved.
 
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+
+using Newtonsoft.Json;
 
 namespace XamlEditor
 {
@@ -18,13 +19,7 @@ namespace XamlEditor
 		protected override String ParentName => "journal";
 
 		[JsonIgnore]
-		public override List<FieldNode> DefaultFields => _defaultFields;
-
-		private readonly static List<FieldNode> _defaultFields = new List<FieldNode>()
-		{
-			new FieldNode() { Name = "Id", Type= FieldType.Id },
-			new FieldNode() { Name = "Date", Type = FieldType.Date }
-		};
+		public override List<FieldNode> DefaultFields => DefaultTableFields.JournalFields;
 	}
 
 	public class JournalsNode : BaseNode

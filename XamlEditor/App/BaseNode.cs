@@ -28,7 +28,9 @@ public class BaseNode : ObservableNode
 	private String _name;
 
 	[JsonProperty(Order = -5)]
-	public String Name { get => _name; set { _name = value; OnPropertyChanged(); OnNameChanged(); } }
+	public String Name { 
+		get => _name; 
+		set { _name = value; OnPropertyChanged(); OnNameChanged(); } }
 
 	[JsonIgnore]
 	public String Image => $"/XamlEditor;Component/Images/{ImageName}.png";

@@ -1,6 +1,7 @@
 ﻿// Copyright © 2024 Oleksandr Kukhtin. All rights reserved.
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 using Newtonsoft.Json;
@@ -9,7 +10,7 @@ namespace XamlEditor;
 
 public class BaseUiNode : ObservableNode
 {
-	[JsonProperty(Order = 2)]
+	[JsonProperty(Order = 1)]
 	public ObservableCollection<UiFieldNode> Fields { get; set; } = [];
 	public Boolean ShouldSerializeFields() => Fields.Count > 0;
 
@@ -39,7 +40,7 @@ public class BaseUiNode : ObservableNode
 	}
 
 	protected EndpointNode _endpoint;
-	internal virtual void SetParent(EndpointNode endpoint) 
+	internal virtual void SetParent(EndpointNode endpoint)
 	{
 		_endpoint = endpoint;
 		foreach (var f in Fields)
@@ -47,6 +48,27 @@ public class BaseUiNode : ObservableNode
 	}
 	internal virtual void OnTableChanged()
 	{
+	}
 
+	[JsonIgnore]
+	public virtual IEnumerable<String> RefFields => GetRefFields(_endpoint.GetTable());
+
+	public IEnumerable<String> GetRefFields(TableNode table)
+	{
+		if (table != null)
+		{
+			foreach (var field in table.DefaultFields)
+				yield return field.Name;
+			foreach (var field in table.Fields)
+			{
+				yield return field.Name;
+				if (field.IsReference)
+				{
+					var refTable = _endpoint.FindTable(field.Ref);
+					foreach (var rfield in refTable.Fields)
+						yield return $"{field.Name}.{rfield.Name}";
+				}
+			}
+		}
 	}
 }

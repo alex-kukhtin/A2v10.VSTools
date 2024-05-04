@@ -110,5 +110,12 @@ namespace XamlEditor
 
 		[JsonIgnore]
 		public Boolean HasClamp => _baseField != null && _baseField.HasClamp;
+
+
+		public override void OnNameChanged()
+		{
+			_baseField = _endpoint?.FindField(Name);
+			OnPropertyChanged(String.Empty);
+		}
 	}
 }

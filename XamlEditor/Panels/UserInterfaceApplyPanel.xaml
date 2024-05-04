@@ -7,7 +7,35 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Margin="6,12,6,6"
 			 Height="Auto" MinHeight="50">
-	<Grid>
+	<StackPanel>
 		<TextBlock>APPLY PANEL</TextBlock>
-    </Grid>
+		<ItemsControl ItemsSource="{Binding Apply}">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="83"/>
+							<ColumnDefinition Width="100"/>
+							<ColumnDefinition Width="100"/>
+							<ColumnDefinition Width="40"/>
+							<ColumnDefinition Width="150"/>
+							<ColumnDefinition Width="40"/>
+							<ColumnDefinition Width="40"/>
+							<ColumnDefinition Width="45"/>
+						</Grid.ColumnDefinitions>
+						<StackPanel Grid.Column="0" Orientation="Horizontal" Margin="3">
+							<Button Content="×" Width="25" CommandParameter="{Binding}"/>
+						</StackPanel>
+						<ComboBox Grid.Column="1" SelectedValue="{Binding Journal}" 
+								ItemsSource="{Binding SourceJournals, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+						<CheckBox Grid.Column="2" IsChecked="{Binding In}" HorizontalAlignment="Center" IsEnabled="{Binding CanSort}"/>
+						<CheckBox Grid.Column="3" IsChecked="{Binding Out}" HorizontalAlignment="Center" IsEnabled="{Binding CanSort}"/>
+						<ComboBox Grid.Column="4" SelectedValue="{Binding Details}" 
+								ItemsSource="{Binding SourceDetails, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
+
+					</Grid>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</StackPanel>
 </UserControl>

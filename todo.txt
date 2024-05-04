@@ -1,10 +1,11 @@
 
 4. Save document
 8. Menu ????
-10. UI Fields: Name from combobox
 11. UI Fields: Display Name from combobox
 13. Default UI для разных элементов
 14. UiField - зависимости разрешений полей
 17. EditUI. Fields - Add
-18. Table.Fields - неправильно работает комбик IsReference
-19. Заменить в индексе Unit (Display = Short) на Unit.Short
+20. Совпасть Defaults с AppBuilder
+21. Apply Panel - Journals
+22. Parameter Field - ComboBox
+24. 

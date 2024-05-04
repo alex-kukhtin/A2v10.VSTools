@@ -1,6 +1,9 @@
 ﻿// Copyright © 2022-2024 Oleksandr Kukhtin. All rights reserved.
 
 
+using System.Collections.Generic;
+using System.Linq;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -19,7 +22,11 @@ public partial class UserInterfaceEditPanel : UserControl
 		InitializeComponent();
 		DataContext = _baseNode;
 		DefaultCheckBox.IsChecked = node.Fields.Count == 0;
+		_baseNode.OnTableChanged(); // Details may have changed
 	}
+
+	public IEnumerable<String> SourceFields => _baseNode.RefFields.ToList();
+
 	private void AddField_Click(object sender, RoutedEventArgs e)
 	{
 	}

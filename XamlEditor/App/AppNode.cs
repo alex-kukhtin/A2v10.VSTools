@@ -11,6 +11,11 @@ namespace XamlEditor;
 
 public class AppNode : BaseNode
 {
+	private String _title;
+
+	[JsonProperty(Order = 1)]
+	public String Title { get => _title; set { _title = value; OnPropertyChanged(); } }
+
 	[JsonIgnore]
 	internal Boolean IsDirty { get; set; }
 	public AppNode()

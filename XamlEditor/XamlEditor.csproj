@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XamlEditor</RootNamespace>
     <AssemblyName>XamlEditor</AssemblyName>
-	  <LangVersion>Latest</LangVersion>
+    <LangVersion>Latest</LangVersion>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -52,10 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\AppNode.cs" />
+    <Compile Include="App\ApplyNode.cs" />
     <Compile Include="App\BaseNode.cs" />
     <Compile Include="App\BaseUiNode.cs" />
     <Compile Include="App\JournalNode.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Match\Constants.cs" />
     <Compile Include="App\DetailsUiNode.cs" />
     <Compile Include="App\EndpointNode.cs" />
     <Compile Include="App\DetailsNode.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Helpers\JsonHelpers.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Markup\EnumBindingSource.cs" />
+    <Compile Include="Match\DefaultTableFields.cs" />
     <Compile Include="Panels\AppPanel.xaml.cs">
       <DependentUpon>AppPanel.xaml</DependentUpon>
     </Compile>

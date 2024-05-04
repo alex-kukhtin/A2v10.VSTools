@@ -39,6 +39,7 @@ namespace XamlEditor
 		{
 		}
 
+		[JsonIgnore]
 		public virtual String Endpoint => $"/{ParentName}/{Name.Singular().ToLowerInvariant()}";
 
 		[JsonIgnore]

@@ -29,6 +29,7 @@ namespace XamlEditor
 		{
 			new FieldNode() { Name = "Id", Type = FieldType.Id },
 			new FieldNode() { Name = "RowNo", Type = FieldType.Integer },
+			new FieldNode() { Name = "Memo", Type = FieldType.String, Length = 255 }
 		};
 	}
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace XamlEditor;
 
@@ -17,13 +18,7 @@ public partial class UserInterfaceDetailsPanel : UserControl
 		DataContextChanged += UserInterfaceDetailsPanel_DataContextChanged;
 	}
 
-	public IEnumerable<String> SourceFields 
-	{ 
-		get
-		{
-			return Node.RefFields().ToList();
-		} 
-	}
+	public IEnumerable<String> SourceFields => Node.RefFields.ToList();
 
 	DetailsUiNode Node => DataContext as DetailsUiNode;
 	private void UserInterfaceDetailsPanel_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)

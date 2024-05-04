@@ -97,9 +97,17 @@
 											SelectedValue="{Binding Type}"/>
 								<TextBox Grid.Column="3" Text="{Binding Length}" TextAlignment="Right" 
 										 Visibility="{Binding HasLength, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-								<ComboBox Grid.Column="4" SelectedValue="{Binding Ref}" 
+								<ComboBox Grid.Column="4" 
 									ItemsSource="{Binding RefTables, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"
-										  Visibility="{Binding HasRef, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+										  Visibility="{Binding IsReference, Converter={StaticResource BooleanToVisibilityConverter}}">
+									<ComboBox.SelectedValue>
+										<Binding Path="Ref">
+											<Binding.ValidationRules>
+												<DataErrorValidationRule />
+											</Binding.ValidationRules>
+										</Binding>
+									</ComboBox.SelectedValue>
+								</ComboBox>
 							</Grid>
 						</DataTemplate>
 					</ItemsControl.ItemTemplate>

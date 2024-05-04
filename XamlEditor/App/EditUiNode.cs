@@ -10,7 +10,7 @@ namespace XamlEditor;
 
 public class EditUiNode : BaseUiNode
 {
-	public String Name { get; set; }
+	[JsonProperty(Order = 11)]
 	public ObservableCollection<DetailsUiNode> Details { get; set; } = [];
 	public Boolean ShouldSerializeDetails() => Details.Count > 0;
 

@@ -25,9 +25,8 @@
 						<ColumnDefinition Width="40"/>
 						<ColumnDefinition Width="65"/>
 						<ColumnDefinition Width="40"/>
-						<ColumnDefinition Width="45"/>
 						<ColumnDefinition Width="40"/>
-						<ColumnDefinition Width="100"/>
+						<ColumnDefinition Width="45"/>
 					</Grid.ColumnDefinitions>
 					<Button Grid.Column="0" Content="+" Margin="3" Padding="3"
 							Click="AddField_Click" />
@@ -36,9 +35,8 @@
 					<Label Grid.Column="3" Content="Sort" HorizontalAlignment="Center"/>
 					<Label Grid.Column="4" Content="Search" />
 					<Label Grid.Column="5" Content="Fit" HorizontalAlignment="Center" />
-					<Label Grid.Column="6" Content="Clamp" />
-					<Label Grid.Column="7" Content="Filter" HorizontalAlignment="Center"/>
-					<Label Grid.Column="8" Content="Display" />
+					<Label Grid.Column="6" Content="Filter" HorizontalAlignment="Center"/>
+					<Label Grid.Column="7" Content="Clamp" />
 				</Grid>
 				<ItemsControl ItemsSource="{Binding Fields}">
 					<ItemsControl.ItemTemplate>
@@ -51,9 +49,8 @@
 									<ColumnDefinition Width="40"/>
 									<ColumnDefinition Width="65"/>
 									<ColumnDefinition Width="40"/>
-									<ColumnDefinition Width="45"/>
 									<ColumnDefinition Width="40"/>
-									<ColumnDefinition Width="100"/>
+									<ColumnDefinition Width="45"/>
 								</Grid.ColumnDefinitions>
 								<StackPanel Grid.Column="0" Orientation="Horizontal" Margin="3">
 									<Button Content="↑" Width="25" Margin="0,0,1,0"
@@ -62,7 +59,8 @@
 											Click="FieldDown_Click" CommandParameter="{Binding}"/>
 									<Button Content="×" Width="25" Click="DeleteField_Click" CommandParameter="{Binding}"/>
 								</StackPanel>
-								<TextBox Grid.Column="1" Text="{Binding Name}" />
+								<ComboBox Grid.Column="1" SelectedValue="{Binding Name}" 
+										ItemsSource="{Binding SourceFields, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
 								<TextBox Grid.Column="2" Text="{Binding Title}" />
 								<CheckBox Grid.Column="3" IsChecked="{Binding Sort}" HorizontalAlignment="Center" IsEnabled="{Binding CanSort}"/>
 
@@ -71,11 +69,10 @@
 											SelectedValue="{Binding Search}" />
 
 								<CheckBox Grid.Column="5" IsChecked="{Binding Fit}" HorizontalAlignment="Center"/>
-								<TextBox Grid.Column="6" Text="{Binding Clamp}" TextAlignment="Right" 
-										 Visibility="{Binding HasClamp, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-								<CheckBox Grid.Column="7" IsChecked="{Binding Filter}" HorizontalAlignment="Center"
+								<CheckBox Grid.Column="6" IsChecked="{Binding Filter}" HorizontalAlignment="Center"
 										  Visibility="{Binding IsReference, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-								<TextBox Grid.Column="8" Text="{Binding Display}" Visibility="{Binding IsReference, Converter={StaticResource BooleanToVisibilityConverter}}" />
+								<TextBox Grid.Column="7" Text="{Binding Clamp}" TextAlignment="Right" 
+										 Visibility="{Binding HasClamp, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 							</Grid>
 						</DataTemplate>
 					</ItemsControl.ItemTemplate>

@@ -1,6 +1,9 @@
 ﻿// Copyright © 2022-2024 Oleksandr Kukhtin. All rights reserved.
 
 
+using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,6 +23,8 @@ namespace XamlEditor
 			DataContext = _baseNode;
 			DefaultCheckBox.IsChecked = node.Fields.Count == 0;
 		}
+		public IEnumerable<String> SourceFields => _baseNode.RefFields.ToList();
+
 		private void AddField_Click(object sender, RoutedEventArgs e)
 		{
 		}
@@ -33,7 +38,7 @@ namespace XamlEditor
 
 		private void CheckBox_Checked(object sender, RoutedEventArgs e)
 		{
-			if (!(sender is CheckBox checkBox))
+			if (sender is not CheckBox checkBox)
 				return;
 			_baseNode.SetDefault(checkBox.IsChecked == true ? null : _root.FindNode(_endpoint.Table));
 		}

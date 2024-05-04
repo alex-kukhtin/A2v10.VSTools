@@ -29,10 +29,6 @@ namespace XamlEditor
 		[JsonProperty(Order = 2)]
 		public String Title { get => _title; set { _title = value; OnPropertyChanged(); OnTableChanged(); } }
 
-		[JsonProperty(Order = 5)]
-		public UiNode UI { get; set; } = new UiNode();
-		public Boolean ShouldSerializeUI() => !UI.IsEmpty();
-
 		private readonly ObservableCollection<KeyValue> _parameters = [];
 
 		[JsonIgnore]
@@ -57,6 +53,12 @@ namespace XamlEditor
 		}
 		public Boolean ShouldSerializeParameters() => ParametersList.Count > 0;
 
+		[JsonProperty(Order = 8)]
+		public UiNode UI { get; set; } = new UiNode();
+		public Boolean ShouldSerializeUI() => !UI.IsEmpty();
+
+		[JsonProperty(Order = 10)]
+		public ObservableCollection<ApplyNode> Apply { get; set; } = [];
 		private void OnTableChanged()
 		{
 			if (Name.StartsWith("Endpoint"))
@@ -69,7 +71,9 @@ namespace XamlEditor
 		{
 			_root = root;
 			UI.SetParent(this);
-		}
+            foreach (var apply in Apply)
+				apply.SetParent(this);
+        }
 
 		internal FieldNode FindField(String Name)
 		{

@@ -19,16 +19,7 @@ namespace XamlEditor
 		protected override String ParentName => "document";
 
 		[JsonIgnore]
-		public override List<FieldNode> DefaultFields => _defaultFields;
-
-		private readonly static List<FieldNode> _defaultFields = new List<FieldNode>()
-		{
-			new FieldNode() { Name = "Id", Type= FieldType.Id },
-			new FieldNode() { Name = "Done", Type = FieldType.Boolean },
-			new FieldNode() { Name = "Date", Type = FieldType.Date },
-			new FieldNode() { Name = "Number", Length = 255 },
-			new FieldNode() { Name = "Memo", Length = 255 }
-		};
+		public override List<FieldNode> DefaultFields => DefaultTableFields.DocumentFields;
 	}
 
 	public class DocumentsNode : BaseNode

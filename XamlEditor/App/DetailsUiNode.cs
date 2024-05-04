@@ -2,8 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Navigation;
 
 namespace XamlEditor;
 
@@ -19,21 +17,7 @@ public class DetailsUiNode : BaseUiNode
 		Name = _table.Name;
 	}
 
-	public IEnumerable<String> RefFields()
-	{
-		foreach (var field in _table.DefaultFields)
-			yield return field.Name;
-		foreach (var field in _table.Fields)
-		{
-			yield return field.Name;
-			if (field.IsReference)
-			{
-				var refTable = _endpoint.FindTable(field.Ref);
-				foreach (var rfield in refTable.Fields)
-					yield return $"{field.Name}.{rfield.Name}";
-			}
-		}
-	}
+	public override IEnumerable<String> RefFields => GetRefFields(_table);
 
 	public void SetDefault(Boolean isDefault)
 	{
