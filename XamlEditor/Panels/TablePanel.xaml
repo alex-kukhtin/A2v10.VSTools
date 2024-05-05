@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:XamlEditor"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Margin="6">
 	<UserControl.Resources>
 		<local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 		<Style TargetType="TextBox">
@@ -48,7 +48,7 @@
 						<ColumnDefinition Width="60"/>
 						<ColumnDefinition Width="150"/>
 					</Grid.ColumnDefinitions>
-					<Button Grid.Column="0" Content="+" Width="25"
+					<Button Grid.Column="0" Content="＋" Width="25"
 							Click="AddField_Click"/>
 					<Label Grid.Column="1" Content="Name" />
 					<Label Grid.Column="2" Content="Type" />
@@ -89,7 +89,7 @@
 									<ColumnDefinition Width="150"/>
 								</Grid.ColumnDefinitions>
 								<StackPanel Grid.Column="0" Orientation="Horizontal" Margin="3">
-									<Button Content="×" Width="25" Click="DeleteField_Click" CommandParameter="{Binding}"/>
+									<Button Content="⨉" Width="25" Click="DeleteField_Click" CommandParameter="{Binding}"/>
 								</StackPanel>
 								<TextBox Grid.Column="1" Text="{Binding Name}" />
 								<ComboBox Grid.Column="2" 

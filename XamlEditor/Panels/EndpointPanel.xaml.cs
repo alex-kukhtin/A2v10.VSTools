@@ -21,10 +21,10 @@ namespace XamlEditor
 
 		public IEnumerable<String> RefTables => _model.RefTables;
 
-		public UserInterfaceIndexPanel UiIndex => new UserInterfaceIndexPanel(_endpoint.UI.Index, _endpoint);
-		public UserInterfaceIndexPanel BrowseIndex => new UserInterfaceIndexPanel(_endpoint.UI.Browse, _endpoint);
-		public UserInterfaceEditPanel EditItem => new UserInterfaceEditPanel(_endpoint.UI.Edit, _endpoint);
-		public UserInterfaceApplyPanel ApplyPanel => new UserInterfaceApplyPanel(_endpoint);
+		public UserInterfaceIndexPanel UiIndex => new(_endpoint.UI.Index, _endpoint);
+		public UserInterfaceIndexPanel BrowseIndex => new(_endpoint.UI.Browse, _endpoint);
+		public UserInterfaceEditPanel EditItem => new(_endpoint.UI.Edit, _endpoint);
+		public UserInterfaceApplyPanel ApplyPanel => new(_endpoint);
 
 		private void AddParameter_Click(object sender, RoutedEventArgs e)
 		{

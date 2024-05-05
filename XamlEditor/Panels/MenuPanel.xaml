@@ -6,7 +6,88 @@
              xmlns:local="clr-namespace:XamlEditor"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+	<UserControl.Resources>
+		<local:PointerToVisibilityConverter x:Key="PointerToVisibilityConverter"/>
+		<Style TargetType="TextBox">
+			<Setter Property="Margin" Value="3"/>
+			<Setter Property="Padding" Value="3"/>
+		</Style>
+		<Style TargetType="ComboBox">
+			<Setter Property="Margin" Value="3"/>
+			<Setter Property="Padding" Value="6,3"/>
+		</Style>
+	</UserControl.Resources>
     <Grid>
-		<TextBlock>MENU PANEL</TextBlock>
-    </Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="300"/>
+			<ColumnDefinition Width="1*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="1*"/>
+		</Grid.RowDefinitions>
+		<ToolBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+				 Background="#F0F0F0" BorderBrush="#DCDCDC" BorderThickness="0,0,0,1">
+			<Button Click="AddMenu_Click">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/XamlEditor;Component/Images/MainMenuControl.png" Margin="2"
+						   Width="16" Height="16"/>
+					<Label Content="Add Menu" />
+				</StackPanel>
+			</Button>
+			<Button Click="AddItem_Click">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/XamlEditor;Component/Images/MainMenuControl.png" Margin="2"
+						   Width="16" Height="16"/>
+					<Label Content="Add Item" />
+				</StackPanel>
+			</Button>
+		</ToolBar>
+		<TreeView x:Name="TreeView" Grid.Row="1" Grid.Column="0"
+				  ItemsSource="{Binding Items}"
+				  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+				  SelectedItemChanged="TreeView_SelectedItemChanged"
+				  BorderThickness="0">
+			<TreeView.Resources>
+				<SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                      Color="#B2D8FE" />
+				<SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"
+                      Color="Black" />
+			</TreeView.Resources>
+			<TreeView.ItemContainerStyle>
+				<Style TargetType="{x:Type TreeViewItem}">
+					<Setter Property="IsExpanded" Value="{Binding IsExpanded}"/>
+					<Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+				</Style>
+			</TreeView.ItemContainerStyle>
+			<TreeView.ItemTemplate>
+				<HierarchicalDataTemplate ItemsSource="{Binding Items}">
+					<StackPanel Orientation="Horizontal">
+						<Image Source="{Binding Image}" Margin="2"/>
+						<TextBlock Text="{Binding Name}" Margin="2"/>
+					</StackPanel>
+				</HierarchicalDataTemplate>
+			</TreeView.ItemTemplate>
+		</TreeView>
+		<Grid Grid.Row="1" Grid.Column="1" Margin="6"
+			Visibility="{Binding SelectedItem, Converter={StaticResource PointerToVisibilityConverter}}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="150"/>
+				<ColumnDefinition Width="150"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Label Grid.Row="0" Grid.Column="0" Content="Name"></Label>
+			<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedItem.Name}"/>
+			<Label Grid.Row="1" Grid.Column="0" Content="Url"></Label>
+			<ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailableEndpoints}"
+					 SelectedValue="{Binding SelectedItem.Url}"/>
+		</Grid>
+	</Grid>
 </UserControl>

@@ -8,4 +8,5 @@
 20. Совпасть Defaults с AppBuilder
 21. Apply Panel - Journals
 22. Parameter Field - ComboBox
-24. 
+24. TableNode -> Apply для каталогов не нужно
+25. 

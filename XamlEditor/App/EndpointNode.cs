@@ -59,10 +59,19 @@ namespace XamlEditor
 
 		[JsonProperty(Order = 10)]
 		public ObservableCollection<ApplyNode> Apply { get; set; } = [];
+
+		public Boolean HasApply => GetTable()?.HasApply ?? false;
+
 		private void OnTableChanged()
 		{
 			if (Name.StartsWith("Endpoint"))
-				Name = Table;
+			{
+				var tbl = _root.FindNode(Table);
+				if (tbl != null)
+					Name = tbl.Endpoint;
+				else
+					Name = Table;
+			}
 			OnPropertyChanged(String.Empty);
 			UI.OnTableChanged();
 		}

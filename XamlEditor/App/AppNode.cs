@@ -30,19 +30,23 @@ public class AppNode : BaseNode
 
 	[JsonProperty(Order = 11)]
 	public ObservableCollection<CatalogNode> Catalogs { get; set; } = [];
-	public Boolean ShouldSerializeCatalogs() => Catalogs != null && Catalogs.Count > 0;
+	public Boolean ShouldSerializeCatalogs() => Catalogs.Count > 0;
 
 	[JsonProperty(Order = 12)]
 	public ObservableCollection<DocumentNode> Documents { get; set; } = [];
-	public Boolean ShouldSerializeDocuments() => Documents != null && Documents.Count > 0;
+	public Boolean ShouldSerializeDocuments() => Documents.Count > 0;
 
 	[JsonProperty(Order = 13)]
 	public ObservableCollection<JournalNode> Journals { get; set; } = [];
-	public Boolean ShouldSerializeJournal() => Journals != null && Journals.Count > 0;
+	public Boolean ShouldSerializeJournal() => Journals.Count > 0;
 
 	[JsonProperty(Order = 14)]
 	public ObservableCollection<EndpointNode> Endpoints { get; set; } = [];
-	public Boolean ShouldSerializeEndpoints() => Endpoints != null && Endpoints.Count > 0;
+	public Boolean ShouldSerializeEndpoints() => Endpoints.Count > 0;
+
+	[JsonProperty(Order = 15)]
+	public ObservableCollection<MenuItemNode> Menu { get; set; } = [];
+	public Boolean ShouldSerializeMenu() => Menu.Count > 0;
 
 	[JsonIgnore]
 	public override IEnumerable<BaseNode> Children
@@ -53,7 +57,7 @@ public class AppNode : BaseNode
 			yield return new DocumentsNode(Documents);
 			yield return new JournalsNode(Journals);
 			yield return new EndpointsNode(Endpoints);
-			yield return new MenuNode() { Name = "Menu" };
+			yield return new MenuNode(this, Menu) { Name = "Menu" };
 		}
 	}
 

@@ -35,6 +35,9 @@ namespace XamlEditor
 		[JsonIgnore]
 		public override IEnumerable<BaseNode> Children => Details;
 
+		[JsonIgnore]
+		public virtual Boolean HasApply => false;
+
 		internal virtual void ApplyDefaults()
 		{
 		}

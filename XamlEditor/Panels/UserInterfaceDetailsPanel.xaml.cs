@@ -28,7 +28,7 @@ public partial class UserInterfaceDetailsPanel : UserControl
 
 	private void DefaultCheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
 	{
-		if (!(sender is CheckBox checkBox))
+		if (sender is not CheckBox checkBox)
 			return;
 		Node.SetDefault(checkBox.IsChecked == true);
 	}
@@ -38,7 +38,7 @@ public partial class UserInterfaceDetailsPanel : UserControl
 
 	private void DeleteField_Click(object sender, RoutedEventArgs e)
 	{
-		if (!(e.Source is Button btnObj) || !(btnObj.CommandParameter is UiFieldNode fn))
+		if (e.Source is not Button btnObj || btnObj.CommandParameter is not UiFieldNode fn)
 			return;
 		Node.Fields.Remove(fn);
 	}

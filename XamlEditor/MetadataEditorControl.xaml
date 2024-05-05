@@ -56,14 +56,10 @@
 		<ToolBar Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
 				 Background="#F0F0F0" BorderBrush="#DCDCDC" BorderThickness="0,0,0,1">
 			<Menu>
-				<MenuItem>
-					<MenuItem.Header>
-						<StackPanel Orientation="Horizontal">
-							<Image Source="/XamlEditor;Component/Images/NewDocument.png"
-								   Margin="2"/>
-							<TextBlock Margin="2">Add</TextBlock>
-						</StackPanel>
-					</MenuItem.Header>
+				<MenuItem Header="Add" Padding="3,3,10,3">
+					<MenuItem.Icon>
+						<Image Source="/XamlEditor;Component/Images/NewDocument.png"/>
+					</MenuItem.Icon>
 					<MenuItem Header="Catalog" Command="{Binding AddCommand}" CommandParameter="Catalog">
 						<MenuItem.Icon>
 							<Image Source="/XamlEditor;Component/Images/Catalog.png"/>
@@ -120,7 +116,7 @@
 			</TreeView.ItemTemplate>
 		</TreeView>
 		<ScrollViewer Grid.Row="1" Grid.Column="2" Background="#FAFAFA">
-			<ContentControl Margin="6">
+			<ContentControl>
 				<ContentControl.Content>
 					<MultiBinding Converter="{StaticResource ObjectToPanelConverter}">
 						<Binding ElementName="TreeView" Path="SelectedItem" />

@@ -10,7 +10,7 @@ namespace XamlEditor
 	{
 		public Boolean IsDirty => _viewModel.IsDirty;
 
-		private readonly ViewModel _viewModel  = new ViewModel();
+		private readonly ViewModel _viewModel  = new();
 		public MetadataEditorControl()
 		{
 			InitializeComponent();

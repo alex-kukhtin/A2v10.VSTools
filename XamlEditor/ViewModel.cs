@@ -13,9 +13,9 @@ namespace XamlEditor
 {
 	public class ViewModel : INotifyPropertyChanged
 	{
-		private AppNode _appNode = new AppNode() { Name = "Application" };
+		private AppNode _appNode = new() { Name = "Application" };
 		private String _path;
-		public ObservableCollection<AppNode> Root { get; } = new ObservableCollection<AppNode>();
+		public ObservableCollection<AppNode> Root { get; } = [];
 
 		public IEnumerable<String> RefTables =>
 			_appNode.Catalogs.Select(c => $"Catalog.{c.Name}")
@@ -57,6 +57,7 @@ namespace XamlEditor
 				OnPropertyChanged();
 				_addDetailsCommand?.OnCanExecuteChanged();
 				_addCommand?.OnCanExecuteChanged();
+				_deleteCommand?.OnCanExecuteChanged();
 			}
 		}
 
@@ -68,19 +69,27 @@ namespace XamlEditor
 
 		private AppMenuCommand _addDetailsCommand;
 		private AppMenuCommand _addCommand;
+		private DeleteCommand _deleteCommand;
 		public AppMenuCommand AddCommand 
 		{
 			get
 			{
-				_addCommand = _addCommand ?? new AddCommand(this);
+				_addCommand ??= new AddCommand(this);
 				return _addCommand;
 			}
 		}
-		public AppMenuCommand DeleteCommand => new DeleteCommand(this);
+		public AppMenuCommand DeleteCommand
+		{
+			get
+			{
+				_deleteCommand ??= new DeleteCommand(this);	
+				return _deleteCommand;
+			}
+		} 
 		public AppMenuCommand AddDetailsCommand 
 		{ 
 			get {
-				_addDetailsCommand = _addDetailsCommand ?? new AddDetailsCommand(this);
+				_addDetailsCommand ??= new AddDetailsCommand(this);
 				return _addDetailsCommand;
 			} 
 		}

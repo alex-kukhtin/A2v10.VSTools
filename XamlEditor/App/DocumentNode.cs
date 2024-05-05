@@ -20,6 +20,9 @@ namespace XamlEditor
 
 		[JsonIgnore]
 		public override List<FieldNode> DefaultFields => DefaultTableFields.DocumentFields;
+
+		[JsonIgnore]
+		public override bool HasApply => true;
 	}
 
 	public class DocumentsNode : BaseNode

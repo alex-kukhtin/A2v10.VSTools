@@ -56,6 +56,7 @@
     <Compile Include="App\BaseNode.cs" />
     <Compile Include="App\BaseUiNode.cs" />
     <Compile Include="App\JournalNode.cs" />
+    <Compile Include="Converters\PointerToVisibilityConverter.cs" />
     <Compile Include="Match\Constants.cs" />
     <Compile Include="App\DetailsUiNode.cs" />
     <Compile Include="App\EndpointNode.cs" />

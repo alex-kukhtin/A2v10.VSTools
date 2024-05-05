@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace XamlEditor;
@@ -29,5 +30,19 @@ public partial class UserInterfaceApplyPanel : UserControl
 			foreach (var details in tbl.Details)
 				yield return $"{itmName}.{details.Name}";
 		}
+	}
+
+	private void AddJournal_Click(Object sender, RoutedEventArgs e)
+	{
+		_endpoint.Apply.Add(new ApplyNode());
+	}
+
+	private void DeleteJournal_Click(Object sender, RoutedEventArgs e)
+	{
+		if (sender is not Button btn)
+			return;
+		if (btn.Tag is not ApplyNode applyNode)
+			return;
+		_endpoint.Apply.Remove(applyNode);
 	}
 }
