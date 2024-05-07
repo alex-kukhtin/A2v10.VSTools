@@ -32,7 +32,7 @@ namespace XamlEditor
 		}
 		private void DeleteParameter_Click(object sender, RoutedEventArgs e)
 		{
-			if (!(e.Source is Button btnObj) || !(btnObj.CommandParameter is KeyValue kv))
+			if (e.Source is not Button btnObj || btnObj.CommandParameter is not KeyValue kv)
 				return;
 			_endpoint.ParametersList.Remove(kv);
 		}

@@ -33,5 +33,12 @@ namespace XamlEditor
 			_catalogs = catalogs;
 		}
 		public override IEnumerable<BaseNode> Children => _catalogs;
+
+		internal override void OnInit(AppNode root)
+		{
+			base.OnInit(root);
+			foreach (var c in _catalogs)
+				c.OnInit(root);
+		}
 	}
 }

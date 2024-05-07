@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+
 using Newtonsoft.Json;
 
 namespace XamlEditor
@@ -76,12 +77,18 @@ namespace XamlEditor
 			UI.OnTableChanged();
 		}
 
-		internal void OnInit(AppNode root)
+		internal override void OnInit(AppNode root)
 		{
+			base.OnInit(root);
 			_root = root;
+			UI.OnInit(root);
 			UI.SetParent(this);
-            foreach (var apply in Apply)
+			foreach (var apply in Apply)
+			{
+				apply.OnInit(root);
 				apply.SetParent(this);
+			}
+			ParametersList.CollectionChanged += CollectionChanged;
         }
 
 		internal FieldNode FindField(String Name)
@@ -100,6 +107,10 @@ namespace XamlEditor
 		internal TableNode FindTable(String name)
 		{
 			return _root.FindNode(name);
+		}
+		private void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+			_root.IsDirty = true;
 		}
 	}
 

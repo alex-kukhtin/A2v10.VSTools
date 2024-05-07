@@ -2,36 +2,29 @@
 
 using System;
 
-namespace XamlEditor
+namespace XamlEditor;
+
+internal class AddCommand(ViewModel _viewModel) : AppMenuCommand
 {
-	internal class AddCommand : AppMenuCommand
+	public override bool CanExecute(Object parameter) => _viewModel.Root.Count > 0;
+
+	public override void Execute(Object parameter)
 	{
-		private readonly ViewModel _viewModel;
-		public AddCommand(ViewModel viewModel)
+		var root = _viewModel.RootNode;
+		switch (parameter?.ToString())
 		{
-			_viewModel = viewModel;
-		}
-
-		public override bool CanExecute(Object parameter) => _viewModel.Root.Count > 0;
-
-		public override void Execute(Object parameter)
-		{
-			var root = _viewModel.Root[0];
-			switch (parameter?.ToString())
-			{
-				case "Catalog":
-					root.AddCatalog();
-					break;
-				case "Document":
-					root.AddDocument();
-					break;
-				case "Journal":
-					root.AddJournal(); 
-					break;
-				case "Endpoint":
-					root.AddEndpoint(); 
-					break;
-			}
+			case "Catalog":
+				root.AddCatalog();
+				break;
+			case "Document":
+				root.AddDocument();
+				break;
+			case "Journal":
+				root.AddJournal(); 
+				break;
+			case "Endpoint":
+				root.AddEndpoint(); 
+				break;
 		}
 	}
 }

@@ -15,29 +15,36 @@ namespace XamlEditor
 	{
 		private AppNode _appNode = new() { Name = "Application" };
 		private String _path;
-		public ObservableCollection<AppNode> Root { get; } = [];
+		public ObservableCollection<BaseNode> Root { get; } = [];
 
+		public AppNode RootNode => _appNode;
 		public IEnumerable<String> RefTables =>
 			_appNode.Catalogs.Select(c => $"Catalog.{c.Name}")
 			.Union(_appNode.Documents.Select(d => $"Document.{d.Name}"));
 
 		public AppNode AppNode => _appNode;
 		public Boolean IsDirty => _appNode.IsDirty;
+
+		public Boolean InitComplete { get; set; }
 		public ViewModel()
 		{
 			Root.Add(_appNode);
 			_appNode.IsSelected = true;
+			Root.Add(new SqlScriptNode(_appNode));
 		}
 
 		public void LoadDocument(String path)
 		{
 			_path = path;
 			var content = System.IO.File.ReadAllText(_path);
-			Root.Remove(_appNode);
+			Root.Clear();
 			_appNode = JsonConvert.DeserializeObject<AppNode>(content, JsonHelpers.DefaultSettings);
 			Root.Add(_appNode);
-			_appNode.OnInit();
+			Root.Add(new SqlScriptNode(_appNode));
+			_appNode.OnInit(_appNode);
 			_appNode.IsSelected = true;
+			_appNode.IsDirty = false;
+			InitComplete = true;
 		}
 		public void SaveDocument()
 		{

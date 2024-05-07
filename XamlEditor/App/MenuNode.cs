@@ -21,9 +21,11 @@ public class MenuNode : BaseNode
 	MenuItemNode _selectedItem;
 	public MenuItemNode SelectedItem { get => _selectedItem; set { _selectedItem = value; OnPropertyChanged(); } }
 
-	internal override void OnInit()
+	internal override void OnInit(AppNode root)
 	{
-		base.OnInit();
+		base.OnInit(root);
+		foreach (var item in Items)
+			item.SetLevel(0);
 	}
 
 	public IEnumerable<String> AllEnpoints()
@@ -38,6 +40,18 @@ public class MenuNode : BaseNode
 	public IEnumerable<String> AvailableEndpoints
 	{
 		get => AllEnpoints().Distinct();
+	}
+
+	public Boolean HasSelected => SelectedItem != null;
+
+	public void RemoveSelected()
+	{
+		var sel = SelectedItem;
+		if (Items.IndexOf(sel) != -1)
+			Items.Remove(sel);
+		else
+			foreach (var item in Items)
+				item.RemoveItem(sel);	
 	}
 }
 
@@ -60,4 +74,23 @@ public class MenuItemNode : BaseNode
 	public String Icon { get => _icon; set { _icon = value; OnPropertyChanged(); } }
 
 	protected override String ImageName => "MainMenuControl";
+
+	[JsonIgnore]
+	internal Int32 Level { get; set; }
+
+	internal void RemoveItem(MenuItemNode sel)
+	{
+		if (Items.IndexOf(sel) != -1) 
+			Items.Remove(sel);
+		else
+			foreach (var item in Items)
+				item.RemoveItem(sel);
+	}
+
+	internal void SetLevel(Int32 level)
+	{
+		Level = level;	
+		foreach (var item in Items)
+			item.SetLevel(level + 1);
+	}
 }

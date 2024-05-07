@@ -21,6 +21,10 @@ namespace XamlEditor
 
 	public class TableNode : BaseNode
 	{
+		public TableNode() 
+		{
+		}
+
 		[JsonProperty(Order = 2)]
 		public ObservableCollection<FieldNode> Fields { get; set; } = [];
 		public Boolean ShouldSerializeFields() => Fields != null && Fields.Count > 0;
@@ -76,6 +80,22 @@ namespace XamlEditor
 			if (r != null)
 				return r;
 			return DefaultFields.FirstOrDefault(f => f.Name == Name);
+		}
+
+		private void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		{
+			_root.IsDirty = true;
+		}
+
+		internal override void OnInit(AppNode root)
+		{
+			base.OnInit(root);
+			foreach (var f in Fields)
+				f.OnInit(root);
+			foreach (var d in Details)
+				d.OnInit(root);
+			Fields.CollectionChanged += CollectionChanged;
+			Details.CollectionChanged += CollectionChanged;
 		}
 	}
 }

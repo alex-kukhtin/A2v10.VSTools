@@ -35,12 +35,19 @@
 					<Label Content="Add Menu" />
 				</StackPanel>
 			</Button>
-			<Button Click="AddItem_Click">
+			<Button Click="AddItem_Click"
+					 IsEnabled="{Binding HasSelected}">
 				<StackPanel Orientation="Horizontal">
 					<Image Source="/XamlEditor;Component/Images/MainMenuControl.png" Margin="2"
 						   Width="16" Height="16"/>
-					<Label Content="Add Item" />
+					<Label Content="Add Item"/>
 				</StackPanel>
+			</Button>
+			<Separator />
+			<Button x:Name="DeleteItem" Click="DeleteItem_Click" ToolTip="Delete Item"
+					 IsEnabled="{Binding HasSelected}">
+				<Image Source="/XamlEditor;Component/Images/Cancel.png" Margin="2"
+						   Width="16" Height="16"/>
 			</Button>
 		</ToolBar>
 		<TreeView x:Name="TreeView" Grid.Row="1" Grid.Column="0"
@@ -85,6 +92,10 @@
 			</Grid.RowDefinitions>
 			<Label Grid.Row="0" Grid.Column="0" Content="Name"></Label>
 			<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedItem.Name}"/>
+			
+			<Label Grid.Row="2" Grid.Column="0" Content="Icon"></Label>
+			<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedItem.Icon}"/>
+
 			<Label Grid.Row="1" Grid.Column="0" Content="Url"></Label>
 			<ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailableEndpoints}"
 					 SelectedValue="{Binding SelectedItem.Url}"/>

@@ -56,7 +56,12 @@
     <Compile Include="App\BaseNode.cs" />
     <Compile Include="App\BaseUiNode.cs" />
     <Compile Include="App\JournalNode.cs" />
+    <Compile Include="App\SqlScriptNode.cs" />
     <Compile Include="Converters\PointerToVisibilityConverter.cs" />
+    <Compile Include="Dialogs\DeployDatabase.xaml.cs">
+      <DependentUpon>DeployDatabase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\DeployViewModel.cs" />
     <Compile Include="Match\Constants.cs" />
     <Compile Include="App\DetailsUiNode.cs" />
     <Compile Include="App\EndpointNode.cs" />
@@ -120,6 +125,10 @@
     <Compile Include="ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Dialogs\DeployDatabase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MetadataEditorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -193,6 +202,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Journal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DatabaseScript.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DatabaseRunning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

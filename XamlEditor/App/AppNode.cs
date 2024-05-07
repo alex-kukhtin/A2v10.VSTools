@@ -23,6 +23,7 @@ public class AppNode : BaseNode
 		Catalogs.CollectionChanged += CollectionChanged;
 		Documents.CollectionChanged += CollectionChanged;
 		Endpoints.CollectionChanged += CollectionChanged;
+		Menu.CollectionChanged += CollectionChanged;
 	}
 
 	[JsonIgnore]
@@ -48,6 +49,7 @@ public class AppNode : BaseNode
 	public ObservableCollection<MenuItemNode> Menu { get; set; } = [];
 	public Boolean ShouldSerializeMenu() => Menu.Count > 0;
 
+	private MenuNode _menuNode;
 	[JsonIgnore]
 	public override IEnumerable<BaseNode> Children
 	{
@@ -57,7 +59,8 @@ public class AppNode : BaseNode
 			yield return new DocumentsNode(Documents);
 			yield return new JournalsNode(Journals);
 			yield return new EndpointsNode(Endpoints);
-			yield return new MenuNode(this, Menu) { Name = "Menu" };
+			_menuNode ??= new MenuNode(this, Menu) { Name = "Menu" };
+			yield return _menuNode;
 		}
 	}
 
@@ -67,7 +70,7 @@ public class AppNode : BaseNode
 		c.ApplyDefaults();
 		Catalogs.Add(c);
 		c.IsSelected = true;
-		c.OnInit();
+		c.OnInit(this);
 	}
 	public void AddDocument()
 	{
@@ -75,7 +78,7 @@ public class AppNode : BaseNode
 		d.ApplyDefaults();
 		Documents.Add(d);
 		d.IsSelected = true;
-		d.OnInit();
+		d.OnInit(this);
 	}
 	public void AddJournal()
 	{
@@ -83,7 +86,7 @@ public class AppNode : BaseNode
 		j.ApplyDefaults();
 		Journals.Add(j);
 		j.IsSelected = true;
-		j.OnInit();
+		j.OnInit(this);
 	}
 	public void AddEndpoint()
 	{
@@ -134,10 +137,18 @@ public class AppNode : BaseNode
 		} 
 	}
 
-	internal override void OnInit()
+	internal override void OnInit(AppNode root)
 	{
-		base.OnInit();
+		base.OnInit(this);
+		foreach (var item in Catalogs)
+			item.OnInit(this);
+		foreach (var item in Documents)
+			item.OnInit(this);
+		foreach (var item in Journals)
+			item.OnInit(this);
 		foreach (var t in Endpoints)
 			t.OnInit(this);
+		_menuNode ??= new MenuNode(this, Menu) { Name = "Menu" };
+		_menuNode?.OnInit(this);
 	}
 }

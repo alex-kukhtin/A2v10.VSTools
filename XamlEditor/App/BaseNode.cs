@@ -3,8 +3,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
-
+using System.Windows.Controls;
 using Newtonsoft.Json;
 
 namespace XamlEditor;
@@ -15,10 +16,15 @@ public class ObservableNode : INotifyPropertyChanged
 
 	public event PropertyChangedEventHandler PropertyChanged;
 
+	private readonly static HashSet<String> SkippedProps = [.. "IsSelected,SelectedItem,HasSelected".Split(',')];
+	private Boolean IsSkipProp(String prop)
+	{
+		return SkippedProps.Contains(prop);
+	}
 	public void OnPropertyChanged([CallerMemberName] String prop = "")
 	{
 		PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-		if (_root != null)
+		if (_root != null && !IsSkipProp(prop))
 			_root.IsDirty = true;	
 	}
 }
@@ -46,7 +52,8 @@ public class BaseNode : ObservableNode
 
 	private Boolean _isSelected;
 	[JsonIgnore]
-	public Boolean IsSelected{
+	public Boolean IsSelected
+	{
 		get
 		{
 			return _isSelected;
@@ -64,7 +71,8 @@ public class BaseNode : ObservableNode
 	{
 	}
 
-	internal virtual void OnInit()
+	internal virtual void OnInit(AppNode root)
 	{
+		_root = root;
 	}
 }
