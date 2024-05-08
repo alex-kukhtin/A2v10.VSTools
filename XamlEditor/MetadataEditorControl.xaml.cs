@@ -34,8 +34,10 @@ public partial class MetadataEditorControl : UserControl
 
 	private void DeployDatabase_Click(object sender, RoutedEventArgs e)
 	{
-		var deploy = new DeployDatabase(_viewModel.AppNode);
-		deploy.Owner = this.Parent as Window;
+		var deploy = new DeployDatabase(_viewModel.AppNode)
+		{
+			Owner = this.Parent as Window
+		};
 		deploy.ShowDialog();
 	}
 }

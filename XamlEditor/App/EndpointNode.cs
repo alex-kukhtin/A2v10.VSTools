@@ -18,6 +18,7 @@ namespace XamlEditor
 		public EndpointNode(AppNode root) 
 		{
 			_root = root;
+			ParametersList.CollectionChanged += CollectionChanged;
 		}
 		[JsonIgnore]
 		protected override String ImageName => "EntryPoint";
@@ -88,7 +89,6 @@ namespace XamlEditor
 				apply.OnInit(root);
 				apply.SetParent(this);
 			}
-			ParametersList.CollectionChanged += CollectionChanged;
         }
 
 		internal FieldNode FindField(String Name)

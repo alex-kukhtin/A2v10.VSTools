@@ -85,6 +85,7 @@ namespace XamlEditor
 
 		internal void SetParent(EndpointNode endpoint)
 		{
+			_root = endpoint._root;
 			_endpoint = endpoint;
 			_baseField = _endpoint.FindField(Name);
 		}

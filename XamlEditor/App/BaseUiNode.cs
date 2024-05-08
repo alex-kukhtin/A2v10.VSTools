@@ -10,6 +10,17 @@ namespace XamlEditor;
 
 public class BaseUiNode : ObservableNode
 {
+	public BaseUiNode()
+	{
+		Fields.CollectionChanged += CollectionChanged;
+	}
+
+	private void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+	{
+		if (_root != null)
+			_root.IsDirty = true;
+	}
+
 	[JsonProperty(Order = 1)]
 	public ObservableCollection<UiFieldNode> Fields { get; set; } = [];
 	public Boolean ShouldSerializeFields() => Fields.Count > 0;
@@ -43,6 +54,7 @@ public class BaseUiNode : ObservableNode
 	internal virtual void SetParent(EndpointNode endpoint)
 	{
 		_endpoint = endpoint;
+		_root = endpoint._root;	
 		foreach (var f in Fields)
 			f.SetParent(endpoint);
 	}
