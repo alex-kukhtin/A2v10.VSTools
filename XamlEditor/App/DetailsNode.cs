@@ -9,7 +9,7 @@ namespace XamlEditor;
 
 public class DetailsNode : TableNode
 {
-	private readonly TableNode _parentTable;
+	private TableNode _parentTable;
 	public DetailsNode(AppNode root, TableNode parent) 
 	{
 		_root = root;
@@ -22,6 +22,9 @@ public class DetailsNode : TableNode
 	public override String Endpoint => null;
 
 	[JsonIgnore]
+	public override String Schema => _parentTable.Schema;
+
+	[JsonIgnore]
 	public override List<FieldNode> DefaultFields => _defaultFields;
 
 	private readonly static List<FieldNode> _defaultFields = [
@@ -29,4 +32,10 @@ public class DetailsNode : TableNode
 		new () { Name = "RowNo", Type = FieldType.Integer },
 		new () { Name = "Memo", Type = FieldType.String, Length = 255 }
 	];
+
+	public void OnInit(AppNode root, TableNode parent)
+	{
+		base.OnInit(root);
+		_parentTable = parent;
+	}
 }

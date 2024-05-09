@@ -1,6 +1,5 @@
 ﻿// Copyright © 2022-2024 Oleksandr Kukhtin. All rights reserved.
 
-
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -27,11 +26,14 @@ namespace XamlEditor
 
 		private void AddField_Click(object sender, RoutedEventArgs e)
 		{
+			var field = new UiFieldNode();
+			field.SetParent(_endpoint);
+			_baseNode.Fields.Add(field);
 		}
 
 		private void DeleteField_Click(object sender, RoutedEventArgs e)
 		{
-			if (!(e.Source is Button btnObj) || !(btnObj.CommandParameter is UiFieldNode fn))
+			if (e.Source is not Button btnObj || btnObj.CommandParameter is not UiFieldNode fn)
 				return;
 			_baseNode.Fields.Remove(fn);
 		}
@@ -44,7 +46,7 @@ namespace XamlEditor
 		}
 		private void FieldUp_Click(object sender, RoutedEventArgs e)
 		{
-			if (!(e.Source is Button btnObj) || !(btnObj.CommandParameter is UiFieldNode fn))
+			if (e.Source is not Button btnObj || btnObj.CommandParameter is not UiFieldNode fn)
 				return;
 			int pos = _baseNode.Fields.IndexOf(fn);
 			if (pos < 1)
@@ -54,7 +56,7 @@ namespace XamlEditor
 
 		private void FieldDown_Click(object sender, RoutedEventArgs e)
 		{
-			if (!(e.Source is Button btnObj) || !(btnObj.CommandParameter is UiFieldNode fn))
+			if (e.Source is not Button btnObj || btnObj.CommandParameter is not UiFieldNode fn)
 				return;
 			int pos = _baseNode.Fields.IndexOf(fn);
 			if (pos >= _baseNode.Fields.Count - 1)

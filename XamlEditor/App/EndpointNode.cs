@@ -110,7 +110,8 @@ namespace XamlEditor
 		}
 		private void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-			_root.IsDirty = true;
+			if (_root != null)
+				_root.IsDirty = true;
 		}
 	}
 

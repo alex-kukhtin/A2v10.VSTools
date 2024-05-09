@@ -29,6 +29,9 @@ public partial class UserInterfaceEditPanel : UserControl
 
 	private void AddField_Click(object sender, RoutedEventArgs e)
 	{
+		var field = new UiFieldNode();
+		field.SetParent(_endpoint);
+		_baseNode.Fields.Add(field);
 	}
 
 	private void DeleteField_Click(object sender, RoutedEventArgs e)

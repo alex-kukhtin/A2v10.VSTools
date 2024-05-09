@@ -1,12 +1,8 @@
 
 4. Save document
-8. Menu ????
-11. UI Fields: Display Name from combobox
 13. Default UI дл€ разных элементов
 14. UiField - зависимости разрешений полей
-17. EditUI. Fields - Add
 20. —овпасть Defaults с AppBuilder
-21. Apply Panel - Journals
 22. Parameter Field - ComboBox
-24. TableNode -> Apply дл€ каталогов не нужно
-25. 
+26. Details Table - нет ссылки на Parent
+27. 

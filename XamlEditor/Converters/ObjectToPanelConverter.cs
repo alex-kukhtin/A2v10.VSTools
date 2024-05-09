@@ -11,17 +11,16 @@ namespace XamlEditor
 		public Object Convert(Object[] values, Type targetType, Object parameter, CultureInfo culture)
 		{
 			var vm = values[1] as ViewModel ?? throw new InvalidOperationException("Invalid Converter parameter");
-			if (values[0] is AppNode appNode)
-				return new AppPanel(appNode);
-			else if (values[0] is EndpointNode endpointNode)
-				return new EndpointPanel(endpointNode, vm);
-			else if (values[0] is DetailsNode detailsNode)
-				return new DetailsPanel(detailsNode, vm);
-			else if (values[0] is TableNode tableNode)
-				return new TablePanel(tableNode, vm);
-			else if (values[0] is MenuNode menuNode)
-				return new MenuPanel(menuNode, vm);
-			return null;
+			return values[0] switch
+			{
+				AppNode appNode => new AppPanel(appNode),
+				EndpointNode endpointNode => new EndpointPanel(endpointNode, vm),
+				DetailsNode detailsNode => new DetailsPanel(detailsNode, vm),
+				TableNode tableNode => new TablePanel(tableNode, vm),
+				MenuNode menuNode => new MenuPanel(menuNode, vm),
+				SqlScriptNode sqlScriptNode => new SqlScriptPanel(vm.RootNode),
+				_ => null
+			};
 		}
 
 		public Object[] ConvertBack(Object value, Type[] targetTypes, object parameter, CultureInfo culture)

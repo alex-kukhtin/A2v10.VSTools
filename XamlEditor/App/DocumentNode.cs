@@ -16,7 +16,12 @@ public class DocumentNode : TableNode
 	}
 	[JsonIgnore]
 	protected override String ImageName => "Document";
+
+	[JsonIgnore]
 	protected override String ParentName => "document";
+
+	[JsonIgnore]
+	public override String Schema => "doc";
 
 	[JsonIgnore]
 	public override List<FieldNode> DefaultFields => DefaultTableFields.DocumentFields;

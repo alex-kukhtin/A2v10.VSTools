@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 
 namespace XamlEditor;
@@ -9,11 +10,19 @@ internal class SqlTextBuilder
 	{
 		StringBuilder builder = new();
 		foreach (var t in node.Catalogs)
-			builder.AppendLine(BuildTable(t));
+		{
+			builder.AppendLine(BuildTable(t, node));
+			foreach (var d in t.Details)
+				builder.AppendLine(BuildTable(d, node));
+		}
 		foreach (var t in node.Documents)
-			builder.AppendLine(BuildTable(t));
+		{
+			builder.AppendLine(BuildTable(t, node));
+			foreach (var d in t.Details)
+				builder.AppendLine(BuildTable(d, node));
+		}
 		foreach (var t in node.Journals)
-			builder.AppendLine(BuildTable(t));
+			builder.AppendLine(BuildTable(t, node));
 		return builder.ToString();
 	}
 
@@ -27,18 +36,23 @@ internal class SqlTextBuilder
 		return builder.ToString();
 	}
 
-	String BuildTable(TableNode table)
+	String BuildTable(TableNode table, AppNode node)
 	{
 		var tableName = table.Name;
-		var schema = "cat"; // TODO
+		var schema = table.Schema;
+
+		var fields = table.DefaultFields.Union(table.Fields).Select(f => f.SqlCreateField(table, node));	
+
 		return $""""
 		------------------------------------------------
 		if not exists(select * from INFORMATION_SCHEMA.SEQUENCES where SEQUENCE_SCHEMA = N'{schema}' and SEQUENCE_NAME = N'SQ_{tableName}')
 			create sequence {schema}.SQ_{tableName} as bigint start with 100 increment by 1;
 		go
 		------------------------------------------------
-		create table {schema}.[{tableName}
+		if not exists(select * from INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA=N'{schema}' and TABLE_NAME=N'{tableName}')
+		create table {schema}.[{tableName}]
 		(
+			{String.Join(",\n\t", fields)}
 		);
 		go
 		"""";
@@ -47,7 +61,8 @@ internal class SqlTextBuilder
 	String BuildTableType(TableNode table)
 	{
 		var tableName = table.Name;
-		var schema = "cat"; // TODO
+		var schema = table.Schema;
+		var fields = table.DefaultFields.Union(table.Fields).Select(f => $"{f.Name} {f.SqlTableType()}");
 		return $""""
 		------------------------------------------------
 		drop type if exists {schema}.[{tableName}.TableType];
@@ -55,7 +70,8 @@ internal class SqlTextBuilder
 		------------------------------------------------
 		create type {schema}.[{tableName}.TableType] as table
 		(
-		)
+			{String.Join(",\n\t", fields)}
+		);
 		go
 		"""";
 	}

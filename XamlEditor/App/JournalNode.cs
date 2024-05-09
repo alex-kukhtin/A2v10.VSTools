@@ -17,6 +17,7 @@ public class JournalNode : TableNode
 	[JsonIgnore]
 	protected override String ImageName => "Journal";
 	protected override String ParentName => "journal";
+	public override String Schema => "jrn";
 
 	[JsonIgnore]
 	public override List<FieldNode> DefaultFields => DefaultTableFields.JournalFields;

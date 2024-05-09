@@ -94,6 +94,9 @@
     <Compile Include="Panels\MenuPanel.xaml.cs">
       <DependentUpon>MenuPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Panels\SqlScriptPanel.xaml.cs">
+      <DependentUpon>SqlScriptPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Panels\TablePanel.xaml.cs">
       <DependentUpon>TablePanel.xaml</DependentUpon>
     </Compile>
@@ -121,6 +124,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Sql\SqlFieldExtensions.cs" />
     <Compile Include="Sql\SqlTextBuilder.cs" />
     <Compile Include="ViewModel.cs" />
   </ItemGroup>
@@ -142,6 +146,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Panels\MenuPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panels\SqlScriptPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
