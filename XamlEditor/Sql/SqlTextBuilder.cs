@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 
 namespace XamlEditor;
@@ -128,16 +129,30 @@ internal class SqlTextBuilder(AppNode _node)
 	{
 		var sb = new StringBuilder(AUTO_GENERATED);
 
+		sb.AppendLine($"""
+		begin
+			set nocount on;			
+
+			declare @moduleId uniqueidentifier = N'{_node.Id}';
+			declare @appName sysname = N'{_node.Name.Replace("'", "''")}';
+			declare @appTitle nvarchar(255) = N'{_node.Title.Replace("'", "''")}';
+		
+			update a2sys.SysParams set StringValue = @appTitle where [Name] = N'AppTitle';		
+			if @@rowcount = 0
+				insert into a2sys.SysParams ([Name], StringValue) values (N'AppTitle', @appTitle);
+
+			update a2sys.Applications set [Uid] = @moduleId, [Name] = @appName where Id = 1 and TenantId = 1;
+			if @@rowcount = 0
+				insert into a2sys.Applications (TenantId, Id, [Uid], [Name], IsDevelopment, [Version]) values (1, 1, @moduleId, @appName, 1, 1);
+		
+		""");
+
 		List<String> menuFields = [];
 		foreach (var menu in _node.Menu)
 			foreach (var me in menu.PlainElements(Guid.Empty))
 				menuFields.Add($"(N'{me.Id}', N'{me.Parent}', {me.Order}, {me.Name.StringValueOrNull()}, {me.Url.StringValueOrNull("page:", "/index/0")}, {me.Icon.StringValueOrNull()})");
 
 		sb.AppendLine($""""
-		begin
-			set nocount on;
-
-			declare @moduleId uniqueidentifier = N'{_node.Id}';
 
 			exec a2ui.RegisterModule @ModuleId = @moduleId, @Name = N'Main'
 			exec a2ui.[Tenant.ConnectModule] @ModuleId = @moduleId, @TenantId = 1;

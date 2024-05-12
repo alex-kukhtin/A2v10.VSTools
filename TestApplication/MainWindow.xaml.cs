@@ -12,7 +12,7 @@ namespace TestApplication
 		{
 			InitializeComponent();
 			//MetaEditor.LoadDocument("C:\\Projects\\AppBuilder2024\\MainApp\\app.metadata");
-			//MetaEditor.LoadDocument("D:\\Experiment\\Step1\\MainApp\\app.metadata");
+			MetaEditor.LoadDocument("D:\\Experiment\\Step1\\MainApp\\app.metadata");
 		}
 	}
 }
