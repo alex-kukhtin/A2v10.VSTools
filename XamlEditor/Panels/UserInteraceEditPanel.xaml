@@ -53,7 +53,7 @@
 											Click="FieldUp_Click" CommandParameter="{Binding}"/>
 									<Button Content="↓" Width="25" Margin="0,0,1,0"
 											Click="FieldDown_Click" CommandParameter="{Binding}"/>
-									<Button Content="×" Width="25" Click="DeleteField_Click" CommandParameter="{Binding}"/>
+									<Button Content="⨉" Width="25" Click="DeleteField_Click" CommandParameter="{Binding}"/>
 								</StackPanel>
 								<ComboBox Grid.Column="1" SelectedValue="{Binding Name}" 
 										ItemsSource="{Binding SourceFields, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>

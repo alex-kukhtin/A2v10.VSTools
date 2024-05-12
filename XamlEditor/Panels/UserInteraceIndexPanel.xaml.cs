@@ -12,8 +12,8 @@ namespace XamlEditor
 	{
 		private readonly AppNode _root;
 		private readonly EndpointNode _endpoint;
-		private readonly BaseUiNode _baseNode;
-		public UserInterfaceIndexPanel(BaseUiNode node, EndpointNode endpoint)
+		private readonly IndexUiNode _baseNode;
+		public UserInterfaceIndexPanel(IndexUiNode node, EndpointNode endpoint)
 		{
 			_root = endpoint._root;
 			_endpoint = endpoint;
@@ -42,7 +42,7 @@ namespace XamlEditor
 		{
 			if (sender is not CheckBox checkBox)
 				return;
-			_baseNode.SetDefault(checkBox.IsChecked == true ? null : _root.FindNode(_endpoint.Table));
+			_baseNode.SetDefault(checkBox.IsChecked ?? false);
 		}
 		private void FieldUp_Click(object sender, RoutedEventArgs e)
 		{

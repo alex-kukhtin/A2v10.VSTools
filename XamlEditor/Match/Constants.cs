@@ -2,11 +2,11 @@
 
 using System;
 
-namespace XamlEditor
+namespace XamlEditor;
+
+// MATCH with A2v10.AppRuntimeBuilder.Constants
+internal static class Constants
 {
-	// MATCH with A2v10.AppRuntimeBuilder.Constants
-	internal static class Constants
-	{
-		internal const Int32 ClampThreshold = 64;
-	}
+	internal const Int32 ClampThreshold = 64;
+	internal const Int32 FitThreshold = 32;
 }

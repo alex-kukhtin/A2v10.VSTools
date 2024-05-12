@@ -4,23 +4,18 @@ using System;
 
 using System.Windows.Input;
 
-namespace XamlEditor
+namespace XamlEditor;
+
+public abstract class AppMenuCommand : ICommand
 {
-	public abstract class AppMenuCommand : ICommand
+	public event EventHandler CanExecuteChanged;
+
+	public void OnCanExecuteChanged()
 	{
-		public AppMenuCommand() 
-		{ 
-		}
-
-		public event EventHandler CanExecuteChanged;
-
-		public void OnCanExecuteChanged()
-		{
-			CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-		}
-
-		public abstract bool CanExecute(object parameter);
-
-		public abstract void Execute(object parameter);
+		CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 	}
+
+	public virtual bool CanExecute(object parameter) => true;
+
+	public abstract void Execute(object parameter);
 }

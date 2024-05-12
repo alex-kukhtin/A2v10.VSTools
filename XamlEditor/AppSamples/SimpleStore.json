@@ -1,0 +1,11 @@
+{
+	"name": "SimpleStock",
+	"title": "Simple Stock Application",
+	"catalogs": [
+		{ "name": "Stores" },
+		{ "name": "Items" }
+	],
+	"documents": [
+		{ "name": "Documents" }
+	]
+}

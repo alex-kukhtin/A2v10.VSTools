@@ -12,14 +12,19 @@ namespace XamlEditor
 			_viewModel = viewModel;
 		}
 
-		public override bool CanExecute(Object parameter) => _viewModel.SelectedItem != null && _viewModel.SelectedItem is TableNode;
+		public override bool CanExecute(Object parameter) => _viewModel.SelectedItem != null &&
+			(_viewModel.SelectedItem is TableNode
+			 || _viewModel.SelectedItem is DetailsNode
+			 || _viewModel.SelectedItem is JournalNode
+			 || _viewModel.SelectedItem is EndpointNode
+		);
 
 		public override void Execute(Object parameter)
 		{
 			if (!CanExecute(parameter))
 				return;
-			if (_viewModel.SelectedItem is TableNode tableNode) 
-				_viewModel.AppNode.DeleteTable(tableNode);
+			if (_viewModel.SelectedItem is BaseNode baseNode) 
+				_viewModel.AppNode.DeleteElement(baseNode);
 		}
 	}
 }

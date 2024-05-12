@@ -17,6 +17,11 @@ public partial class MetadataEditorControl : UserControl
 		DataContext = _viewModel;
 	}
 
+	public void HideSave()
+	{
+		_viewModel.ShowSave = false;
+	}
+
 	private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
 	{
 		_viewModel.SelectedItem = e.NewValue;
@@ -39,5 +44,10 @@ public partial class MetadataEditorControl : UserControl
 			Owner = this.Parent as Window
 		};
 		deploy.ShowDialog();
+	}
+
+	private void Save_Click(object sender, RoutedEventArgs e)
+	{
+		_viewModel.SaveDocument();
 	}
 }

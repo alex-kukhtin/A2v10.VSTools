@@ -3,7 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
+using System.Collections.Specialized;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace XamlEditor
@@ -61,6 +62,7 @@ namespace XamlEditor
 
 		[JsonProperty(Order = 10)]
 		public ObservableCollection<ApplyNode> Apply { get; set; } = [];
+		public Boolean ShouldSerializeApply() => Apply.Count > 0;
 
 		public Boolean HasApply => GetTable()?.HasApply ?? false;
 
@@ -108,11 +110,19 @@ namespace XamlEditor
 		{
 			return _root.FindNode(name);
 		}
-		private void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+		private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			if (_root != null)
 				_root.IsDirty = true;
 		}
+
+		internal Boolean IsParameter(FieldNode field)
+		{
+			return ParametersList != null && Parameters.ContainsKey(field.Name);
+		}
+
+		[JsonIgnore]
+		public IEnumerable<String> ParamFields => FindTable(Table).Fields.Select(s => s.Name);
 	}
 
 	public class EndpointsNode : BaseNode

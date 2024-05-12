@@ -1,9 +1,8 @@
 ﻿// Copyright © 2022-2024 Oleksandr Kukhtin. All rights reserved.
 
-
-using System.Collections.Generic;
-using System.Linq;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -45,7 +44,7 @@ public partial class UserInterfaceEditPanel : UserControl
 	{
 		if (sender is not CheckBox checkBox)
 			return;
-		_baseNode.SetDefault(checkBox.IsChecked == true ? null : _root.FindNode(_endpoint.Table));
+		_baseNode.SetDefault(checkBox.IsChecked ?? false);
 	}
 
 	private void FieldUp_Click(object sender, RoutedEventArgs e)

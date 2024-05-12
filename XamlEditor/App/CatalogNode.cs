@@ -18,7 +18,7 @@ public class CatalogNode : TableNode
 	protected override String ImageName => "Catalog";
 
 	[JsonIgnore]
-	protected override String ParentName => "catalog";
+	public override String ParentName => "Catalog";
 
 	[JsonIgnore]
 	public override String Schema => "cat";

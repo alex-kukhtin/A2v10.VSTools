@@ -57,7 +57,7 @@
 											Click="FieldUp_Click" CommandParameter="{Binding}"/>
 									<Button Content="↓" Width="25" Margin="0,0,1,0"
 											Click="FieldDown_Click" CommandParameter="{Binding}"/>
-									<Button Content="×" Width="25" Click="DeleteField_Click" CommandParameter="{Binding}"/>
+									<Button Content="⨉" Width="25" Click="DeleteField_Click" CommandParameter="{Binding}"/>
 								</StackPanel>
 								<ComboBox Grid.Column="1" SelectedValue="{Binding Name}" 
 										ItemsSource="{Binding SourceFields, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
@@ -70,7 +70,7 @@
 
 								<CheckBox Grid.Column="5" IsChecked="{Binding Fit}" HorizontalAlignment="Center"/>
 								<CheckBox Grid.Column="6" IsChecked="{Binding Filter}" HorizontalAlignment="Center"
-										  Visibility="{Binding IsReference, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+										  Visibility="{Binding CanFilter, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 								<TextBox Grid.Column="7" Text="{Binding Clamp}" TextAlignment="Right" 
 										 Visibility="{Binding HasClamp, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 							</Grid>

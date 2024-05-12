@@ -32,18 +32,18 @@ public class BaseUiNode : ObservableNode
 	{
 		return this.Fields.Count == 0;
 	}
-	public void SetDefault(TableNode tableNode)
+
+	public virtual void ApplyDefaults(TableNode table = null)
 	{
-		if (tableNode == null)
+	}
+
+	public virtual void SetDefault(Boolean isDefault, TableNode table = null)
+	{
+		if (isDefault)
 			Fields.Clear();
 		else
 		{
-			foreach (var f in tableNode.DefaultFields)
-				Fields.Add(new UiFieldNode() { Name = f.Name });
-
-			foreach (var f in tableNode.Fields)
-				Fields.Add(new UiFieldNode() { Name = f.Name });
-
+			ApplyDefaults(table);
 			foreach (var f in Fields)
 				f.SetParent(_endpoint);
 		}

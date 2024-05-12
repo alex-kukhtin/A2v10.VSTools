@@ -70,6 +70,8 @@
 								<TextBox Grid.Column="3" Text="{Binding Length}" TextAlignment="Right" 
 										 Visibility="{Binding HasLength, Converter={StaticResource BooleanToVisibilityConverter}}"
 										 IsEnabled="False"/>
+								<TextBox Grid.Column="4" Text="{Binding Ref}" IsEnabled="False"
+										 Visibility="{Binding IsReference, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 							</Grid>
 						</DataTemplate>
 					</ItemsControl.ItemTemplate>
@@ -86,7 +88,7 @@
 									<ColumnDefinition Width="150"/>
 								</Grid.ColumnDefinitions>
 								<StackPanel Grid.Column="0" Orientation="Horizontal" Margin="3">
-									<Button Content="×" Width="25" Click="DeleteField_Click" CommandParameter="{Binding}"/>
+									<Button Content="⨉" Width="25" Click="DeleteField_Click" CommandParameter="{Binding}"/>
 								</StackPanel>
 								<TextBox Grid.Column="1" Text="{Binding Name}" />
 								<ComboBox Grid.Column="2" 

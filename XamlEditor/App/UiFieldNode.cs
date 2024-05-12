@@ -2,6 +2,7 @@
 
 using System;
 using System.Windows;
+
 using Newtonsoft.Json;
 
 namespace XamlEditor
@@ -112,6 +113,8 @@ namespace XamlEditor
 		[JsonIgnore]
 		public Boolean HasClamp => _baseField != null && _baseField.HasClamp;
 
+		[JsonIgnore]
+		public Boolean CanFilter => _baseField != null && _baseField.CanFilter;
 
 		public override void OnNameChanged()
 		{

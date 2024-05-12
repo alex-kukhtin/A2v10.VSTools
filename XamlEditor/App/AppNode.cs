@@ -12,19 +12,32 @@ namespace XamlEditor;
 
 public class AppNode : BaseNode
 {
-	private String _title;
-
-	[JsonProperty(Order = 1)]
-	public String Title { get => _title; set { _title = value; OnPropertyChanged(); } }
-
-	[JsonIgnore]
-	internal Boolean IsDirty { get; set; }
 	public AppNode()
 	{
 		Catalogs.CollectionChanged += CollectionChanged;
 		Documents.CollectionChanged += CollectionChanged;
 		Endpoints.CollectionChanged += CollectionChanged;
 		Menu.CollectionChanged += CollectionChanged;
+	}
+	
+	private String _title;
+
+	[JsonProperty(Order = 1)]
+	public String Title { get => _title; set { _title = value; OnPropertyChanged(); } }
+
+	private Guid _id = Guid.NewGuid();	
+
+	[JsonProperty(Order = -1)]
+	public Guid Id { get => _id; set => _id = value; }
+
+	[JsonIgnore]
+	internal Boolean IsDirty { get; set; }
+
+	[JsonIgnore] 
+	public Boolean IsEmpty 
+	{ 
+		get => Catalogs.Count == 0 && Documents.Count == 0 && Journals.Count == 0 && Endpoints.Count == 0
+				&& Menu.Count == 0;
 	}
 
 	[JsonIgnore]
@@ -40,7 +53,7 @@ public class AppNode : BaseNode
 
 	[JsonProperty(Order = 13)]
 	public ObservableCollection<JournalNode> Journals { get; set; } = [];
-	public Boolean ShouldSerializeJournal() => Journals.Count > 0;
+	public Boolean ShouldSerializeJournals() => Journals.Count > 0;
 
 	[JsonProperty(Order = 14)]
 	public ObservableCollection<EndpointNode> Endpoints { get; set; } = [];
@@ -97,17 +110,47 @@ public class AppNode : BaseNode
 		d.OnInit(this);
 	}
 
-	public void DeleteTable(TableNode table)
+	public void DeleteElement(BaseNode table)
 	{
 		if (table is CatalogNode catalogNode)
+		{
 			if (Catalogs.Contains(catalogNode))
-				Catalogs.Remove(catalogNode);	
+				Catalogs.Remove(catalogNode);
+		}
 		else if (table is DocumentNode documentNode)
+		{
 			if (Documents.Contains(documentNode))
 				Documents.Remove(documentNode);
+		}
 		else if (table is JournalNode journalNode)
+		{
 			if (Journals.Contains(journalNode))
 				Journals.Remove(journalNode);
+		}
+		else if (table is EndpointNode endpointNode)
+		{
+			if (Endpoints.Contains(endpointNode))
+				Endpoints.Remove(endpointNode);
+		}
+		else if (table is DetailsNode detailsNode)
+		{
+			foreach (var c in Catalogs)
+			{
+				if (c.Details.Contains(detailsNode))
+				{
+					c.Details.Remove(detailsNode);
+					return;
+				}
+			}
+			foreach (var d in Documents)
+			{
+				if (d.Details.Contains(detailsNode))
+				{
+					d.Details.Remove(detailsNode);
+					return;
+				}
+			}
+		}
 	}
 
 	public TableNode FindNode(String table)

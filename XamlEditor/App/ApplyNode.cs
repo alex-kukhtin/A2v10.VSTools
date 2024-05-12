@@ -26,9 +26,13 @@ public class ApplyNode : BaseNode
 	[JsonProperty(Order = -3)]
 	public Boolean Out { get => _out; set { _out = value; OnPropertyChanged(); } }
 
-	private String _details;
+	private Boolean _storno;
 	[JsonProperty(Order = -2)]
-	public String Details { get => _details; set { _details = value; OnPropertyChanged(); } }
+	public Boolean Storno { get => _storno; set { _storno = value ; OnPropertyChanged(); } }
+
+	private String _source;
+	[JsonProperty(Order = -1)]
+	public String Source { get => _source; set { _source = value; OnPropertyChanged(); } }
 
 	internal void SetParent(EndpointNode endpoint)
 	{

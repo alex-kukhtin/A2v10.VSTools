@@ -47,10 +47,10 @@ public abstract class TableNode : BaseNode
 	}
 
 	[JsonIgnore]
-	public virtual String Endpoint => $"/{ParentName}/{Name.Singular().ToLowerInvariant()}";
+	public virtual String Endpoint => $"/{ParentName}/{Name.Singular()}".ToLowerInvariant();
 
 	[JsonIgnore]
-	protected virtual String ParentName => String.Empty;
+	public virtual String ParentName => String.Empty;
 
 	[JsonIgnore]
 	public abstract String Schema { get; }

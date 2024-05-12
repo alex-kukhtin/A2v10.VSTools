@@ -16,7 +16,7 @@ public class JournalNode : TableNode
 	}
 	[JsonIgnore]
 	protected override String ImageName => "Journal";
-	protected override String ParentName => "journal";
+	public override String ParentName => "Journal";
 	public override String Schema => "jrn";
 
 	[JsonIgnore]

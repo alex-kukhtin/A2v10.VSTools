@@ -26,18 +26,22 @@
 							<Image Source="/XamlEditor;Component/Images/Journal.png"/>
 						</MenuItem.Icon>
 					</MenuItem>
-					<Separator />
 					<MenuItem Header="Details"
 							  Command="{Binding AddDetailsCommand}">
 						<MenuItem.Icon>
 							<Image Source="/XamlEditor;Component/Images/Table.png"/>
 						</MenuItem.Icon>
 					</MenuItem>
+					<Separator />
+					<MenuItem Header="Endpoint"
+							  Command="{Binding AddCommand}" CommandParameter="Endpoint">
+						<MenuItem.Icon>
+							<Image Source="/XamlEditor;Component/Images/EntryPoint.png"/>
+						</MenuItem.Icon>
+					</MenuItem>
 				</MenuItem>
 				<Separator />
-				<MenuItem Header="Delete" Command="{Binding DeleteCommand}">
-
-				</MenuItem>
+				<MenuItem Header="Delete" Command="{Binding DeleteCommand}" />
 			</ContextMenu>
 		</ResourceDictionary>
 	</UserControl.Resources>
@@ -76,7 +80,7 @@
 							<Image Source="/XamlEditor;Component/Images/Journal.png"/>
 						</MenuItem.Icon>
 					</MenuItem>
-					<MenuItem Header="Details" Command="{Binding AddCommand}" CommandParameter="Details">
+					<MenuItem Header="Details" Command="{Binding AddDetailsCommand}">
 						<MenuItem.Icon>
 							<Image Source="/XamlEditor;Component/Images/Table.png"/>
 						</MenuItem.Icon>
@@ -84,16 +88,23 @@
 					<Separator />
 					<MenuItem Header="Endpoint" Command="{Binding AddCommand}" CommandParameter="Endpoint">
 						<MenuItem.Icon>
-							<Image Source="/XamlEditor;Component/Images/NewDocument.png"/>
+							<Image Source="/XamlEditor;Component/Images/EntryPoint.png"/>
 						</MenuItem.Icon>
 					</MenuItem>
 				</MenuItem>
 			</Menu>
-			<Button>
+			<Button x:Name="Delete" Command="{Binding DeleteCommand}">
 				<Image Source="/XamlEditor;Component/Images/Cancel.png" Margin="2"
 					   Width="16" Height="16"/>
 			</Button>
 			<Separator />
+			<Button x:Name="Save" Click="Save_Click">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/XamlEditor;Component/Images/Save.png" Margin="2"
+					   Width="16" Height="16"/>
+					<Label Content="Save" Padding="2" Margin="0"/>
+				</StackPanel>
+			</Button>
 			<Button x:Name="DeployDatabase" Click="DeployDatabase_Click">
 				<StackPanel Orientation="Horizontal">
 					<Image Source="/XamlEditor;Component/Images/DatabaseRunning.png" Margin="2"

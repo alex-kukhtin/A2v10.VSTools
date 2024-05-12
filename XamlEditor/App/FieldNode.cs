@@ -18,7 +18,8 @@ namespace XamlEditor
 		Float,
 		Money,
 		Guid,
-		Reference
+		Reference,
+		Parent
 	}
 
 	public class FieldNode : BaseNode, IDataErrorInfo
@@ -37,15 +38,20 @@ namespace XamlEditor
 		public String Ref { get => _ref; set { _ref = value; OnPropertyChanged(); } }
 		public Boolean ShouldSerializeRef() => IsReference;
 
+		[JsonProperty(Order = 6)]
+		public Boolean Required { get; set; }
+
 		[JsonIgnore]
 		public Boolean HasLength  => _type == FieldType.String;
 		[JsonIgnore]
-		public Boolean IsReference => _type == FieldType.Reference;
+		public Boolean IsReference => _type == FieldType.Reference || _type == FieldType.Parent;
 
 		[JsonIgnore]
 		public Boolean CanSort => _type != FieldType.Reference;
 		[JsonIgnore]
 		public Boolean CanSearch => _type != FieldType.Reference;
+		[JsonIgnore]
+		public Boolean CanFilter => _type == FieldType.Reference || _type == FieldType.Date || _type == FieldType.DateTime;
 		[JsonIgnore]
 		public Boolean HasClamp => _type == FieldType.String && Length >= Constants.ClampThreshold;
 

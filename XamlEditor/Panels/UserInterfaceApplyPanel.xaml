@@ -15,6 +15,7 @@
 				<ColumnDefinition Width="150"/>
 				<ColumnDefinition Width="40"/>
 				<ColumnDefinition Width="40"/>
+				<ColumnDefinition Width="45"/>
 			</Grid.ColumnDefinitions>
 			<Button Grid.Column="0" Content="+" Width="25"
 				x:Name="AddJournal" Click="AddJournal_Click"/>
@@ -22,6 +23,7 @@
 			<Label Grid.Column="2" Content="Source" />
 			<Label Grid.Column="3" Content="In" HorizontalAlignment="Center"/>
 			<Label Grid.Column="4" Content="Out" HorizontalAlignment="Center"/>
+			<Label Grid.Column="5" Content="Storno" HorizontalAlignment="Center"/>
 		</Grid>
 		<ItemsControl ItemsSource="{Binding Apply}">
 			<ItemsControl.ItemTemplate>
@@ -33,20 +35,19 @@
 							<ColumnDefinition Width="150"/>
 							<ColumnDefinition Width="40"/>
 							<ColumnDefinition Width="40"/>
-							<ColumnDefinition Width="40"/>
-							<ColumnDefinition Width="40"/>
 							<ColumnDefinition Width="45"/>
 						</Grid.ColumnDefinitions>
 						<StackPanel Grid.Column="0" Orientation="Horizontal" Margin="3">
-							<Button Content="×" Width="25" Tag="{Binding}"
+							<Button Content="⨉" Width="25" Tag="{Binding}"
 								x:Name="DeleteJournal" Click="DeleteJournal_Click"/>
 						</StackPanel>
 						<ComboBox Grid.Column="1" SelectedValue="{Binding Journal}" 
 								ItemsSource="{Binding SourceJournals, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
-						<ComboBox Grid.Column="2" SelectedValue="{Binding Details}" 
+						<ComboBox Grid.Column="2" SelectedValue="{Binding Source}" 
 								ItemsSource="{Binding SourceDetails, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}"/>
-						<CheckBox Grid.Column="3" IsChecked="{Binding In}" HorizontalAlignment="Center" IsEnabled="{Binding CanSort}"/>
-						<CheckBox Grid.Column="4" IsChecked="{Binding Out}" HorizontalAlignment="Center" IsEnabled="{Binding CanSort}"/>
+						<CheckBox Grid.Column="3" IsChecked="{Binding In}" HorizontalAlignment="Center" />
+						<CheckBox Grid.Column="4" IsChecked="{Binding Out}" HorizontalAlignment="Center" />
+						<CheckBox Grid.Column="5" IsChecked="{Binding Storno}" HorizontalAlignment="Center" />
 					</Grid>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>

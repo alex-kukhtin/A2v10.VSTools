@@ -68,4 +68,11 @@ public class EditUiNode : BaseUiNode
 		CreateDetails();
 		OnPropertyChanged(String.Empty);
 	}
+
+	public override void ApplyDefaults(TableNode table = null)
+	{
+		var def = DefaultUiFields.DefaultUiEditElement(_endpoint);
+		foreach (var f in def)
+			Fields.Add(f);
+	}
 }

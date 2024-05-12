@@ -24,6 +24,7 @@ namespace A2v10.MetadataEditor
 		protected override void Initialize()
 		{
 			_control = new MetadataEditorControl();
+			_control.HideSave();
 			Content = _control;
 		}
 

@@ -56,7 +56,9 @@
     <Compile Include="App\BaseNode.cs" />
     <Compile Include="App\BaseUiNode.cs" />
     <Compile Include="App\JournalNode.cs" />
+    <Compile Include="App\JsonScriptNode.cs" />
     <Compile Include="App\SqlScriptNode.cs" />
+    <Compile Include="Commands\CreateSampleCommand.cs" />
     <Compile Include="Converters\PointerToVisibilityConverter.cs" />
     <Compile Include="Dialogs\DeployDatabase.xaml.cs">
       <DependentUpon>DeployDatabase.xaml</DependentUpon>
@@ -84,12 +86,16 @@
     <Compile Include="Helpers\JsonHelpers.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Markup\EnumBindingSource.cs" />
+    <Compile Include="Match\DefaultUiFields.cs" />
     <Compile Include="Match\DefaultTableFields.cs" />
     <Compile Include="Panels\AppPanel.xaml.cs">
       <DependentUpon>AppPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Panels\EndpointPanel.xaml.cs">
       <DependentUpon>EndpointPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\JsonScriptPanel.xaml.cs">
+      <DependentUpon>JsonScriptPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Panels\MenuPanel.xaml.cs">
       <DependentUpon>MenuPanel.xaml</DependentUpon>
@@ -145,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Panels\JsonScriptPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Panels\MenuPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,6 +189,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="AppSamples\SimpleStore.json" />
     <None Include="Key.snk" />
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +230,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\DatabaseRunning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\JsonFile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Save.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

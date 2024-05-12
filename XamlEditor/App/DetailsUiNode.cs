@@ -19,21 +19,14 @@ public class DetailsUiNode : BaseUiNode
 
 	public override IEnumerable<String> RefFields => GetRefFields(_table);
 
-	public void SetDefault(Boolean isDefault)
+	public override void ApplyDefaults(TableNode table = null)
 	{
-		if (isDefault)
-			Fields.Clear();
-		else
-		{
-			foreach (var f in _table.DefaultFields)
-				Fields.Add(new UiFieldNode() { Name = f.Name });
-
-			foreach (var f in _table.Fields)
-				Fields.Add(new UiFieldNode() { Name = f.Name });
-
-			foreach (var f in Fields)
-				f.SetParent(_endpoint);
-		}
-		OnPropertyChanged(nameof(IsDefault));
+		var def = DefaultUiFields.DefaultUiDetailsElement(_table);
+		foreach (var f in def)
+			Fields.Add(f);
+	}
+	public override void SetDefault(bool isDefault, TableNode table = null)
+	{
+		base.SetDefault(isDefault, _table);
 	}
 }

@@ -25,13 +25,26 @@ public class DetailsNode : TableNode
 	public override String Schema => _parentTable.Schema;
 
 	[JsonIgnore]
-	public override List<FieldNode> DefaultFields => _defaultFields;
+	public override List<FieldNode> DefaultFields => GetDefaultFields();
 
-	private readonly static List<FieldNode> _defaultFields = [
-		new () { Name = "Id", Type = FieldType.Id },
-		new () { Name = "RowNo", Type = FieldType.Integer },
-		new () { Name = "Memo", Type = FieldType.String, Length = 255 }
-	];
+	private List<FieldNode> GetDefaultFields() {
+		List<FieldNode> fields = 
+		[
+			new() { Name = "Id", Type = FieldType.Id },
+			new() { Name = "RowNo", Type = FieldType.Integer }
+		];
+		fields.Add(new() { 
+			Name = _parentTable.Name.Singular(), 
+			Type = FieldType.Parent, 
+			Ref = $"{_parentTable.ParentName}.{_parentTable.Name}"
+		});
+		fields.Add(new FieldNode()
+			{ 
+				Name = "Memo", Type = FieldType.String, Length = 255 
+			}
+		);
+		return fields;
+	}
 
 	public void OnInit(AppNode root, TableNode parent)
 	{

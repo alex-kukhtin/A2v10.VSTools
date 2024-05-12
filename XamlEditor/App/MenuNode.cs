@@ -55,6 +55,15 @@ public class MenuNode : BaseNode
 	}
 }
 
+public record MenuSqlNode
+{
+	public Guid Id;
+	public Guid Parent;
+	public String Name;
+	public String Url;
+	public Int32 Order;
+	public String Icon;
+}
 public class MenuItemNode : BaseNode
 {
 	[JsonProperty(Order = 3)]
@@ -92,5 +101,16 @@ public class MenuItemNode : BaseNode
 		Level = level;	
 		foreach (var item in Items)
 			item.SetLevel(level + 1);
+	}
+
+	internal IEnumerable<MenuSqlNode> PlainElements(Guid parent, Int32 order = 0)
+	{
+		yield return new MenuSqlNode() { Id = this.Id, Parent = parent, Order = order, Name = this.Name, Icon = this.Icon, Url = this.Url };
+		Int32 _order = 0;
+		foreach (var m in Items)
+		{
+			foreach (var pe in m.PlainElements(this.Id, _order += 10))
+				yield return pe;
+		}			
 	}
 }

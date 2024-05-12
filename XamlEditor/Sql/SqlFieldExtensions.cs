@@ -1,8 +1,9 @@
-﻿using System;
+﻿// Copyright © 2024 Oleksandr Kukhtin. All rights reserved.
+
+using System;
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace XamlEditor;
 
@@ -12,7 +13,7 @@ internal static class SqlFieldExtensions
 	{
 		return field.Type switch
 		{
-			FieldType.Id or FieldType.Reference => "bigint",
+			FieldType.Id or FieldType.Reference or FieldType.Parent => "bigint",
 			FieldType.Money => "money",
 			FieldType.String => $"nvarchar({field.Length})",
 			FieldType.DateTime => "datetime",
@@ -35,16 +36,39 @@ internal static class SqlFieldExtensions
 			return $"""
 			Id bigint not null
 					constraint PK_{tableName} primary key
-					constraint DF_{tableName}_Id default (next value for {schema}.SQ_{tableName}),			
+					constraint DF_{tableName}_Id default (next value for {schema}.SQ_{tableName})
 			""";
-		if (field.Type == FieldType.Reference)
+		if (field.Type == FieldType.Reference || field.Type == FieldType.Parent)
 		{
 			var refTable = root.FindNode(field.Ref);
 			return $"""
-			[{field.Name}] bigint 
-					constraint FK_{tableName}_{field.Name} foreign key references {refTable.Schema}[{refTable.Name}](Id)
+			{field.Name.EscapeSql()} bigint 
+					constraint FK_{tableName}_{field.Name}_{refTable.Name} foreign key references {refTable.Schema}.{refTable.Name.EscapeSql()}(Id)
 			""";
 		}
-		return $"[{field.Name}] {field.SqlTableType()}";
+		var notNull = field.Required ? " not null" : String.Empty;
+		return $"{field.Name.EscapeSql()} {field.SqlTableType()}{notNull}";
+	}
+
+	private static readonly HashSet<String> _escapeNames =
+		[.. "Name,Date,Sum,Avg,Min,Max,Rows,External,File,For,From,To,Group,Case,If,Into,Table,Tran,Union,Update,Insert,Delete,Inner,Outer".Split([','], StringSplitOptions.RemoveEmptyEntries)];
+	public static String EscapeSql(this String name) 
+	{
+		if (_escapeNames.Contains(name,StringComparer.OrdinalIgnoreCase))
+			return $"[{name}]";
+		return name;
+	}
+
+	public static String StringValueOrNull(this String text, String prefix = null, String suffix = null)
+	{
+		if (String.IsNullOrEmpty(text))
+			return "null";
+		return $"N'{prefix}{text}{suffix}'";
+	}
+	public static String IntValueOrNull(this Int32 val)
+	{
+		if (val == 0)
+			return "null";
+		return val.ToString();
 	}
 }

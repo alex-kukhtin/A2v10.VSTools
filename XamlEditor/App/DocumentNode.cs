@@ -18,7 +18,7 @@ public class DocumentNode : TableNode
 	protected override String ImageName => "Document";
 
 	[JsonIgnore]
-	protected override String ParentName => "document";
+	public override String ParentName => "Document";
 
 	[JsonIgnore]
 	public override String Schema => "doc";
