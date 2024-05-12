@@ -51,6 +51,7 @@ public class BaseUiNode : ObservableNode
 	}
 
 	protected EndpointNode _endpoint;
+	public EndpointNode GetEndpoint() => _endpoint;	
 	internal virtual void SetParent(EndpointNode endpoint)
 	{
 		_endpoint = endpoint;

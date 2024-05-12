@@ -1,18 +1,13 @@
-﻿using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.OLE.Interop;
-using Microsoft.VisualStudio.Package;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.Win32;
+﻿using EnvDTE;
+
 using System;
-using System.ComponentModel.Design;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
 using Task = System.Threading.Tasks.Task;
+
+using Microsoft.VisualStudio.Shell;
+
 
 namespace A2v10.MetadataEditor
 {
@@ -75,10 +70,18 @@ namespace A2v10.MetadataEditor
 			// Do any initialization that requires the UI thread after switching to the UI thread.
 			await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-			_editorFactory = new MetadataEditorFactory();
+			var solutionName = "Test1";
+
+			var dteObj = await GetServiceAsync(typeof(DTE));
+			if (dteObj != null)
+			{
+				var dte = (DTE)dteObj;
+				var fullSolutionName = dte.Solution.FullName;
+				solutionName = Path.GetFileNameWithoutExtension(fullSolutionName);
+			}
+			_editorFactory = new MetadataEditorFactory(solutionName);
 			RegisterEditorFactory(_editorFactory);
 		}
-
 		#endregion
 	}
 }

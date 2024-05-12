@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace XamlEditor;
 
@@ -7,16 +8,16 @@ namespace XamlEditor;
 /// </summary>
 public partial class DeployDatabase : Window
 {
-	DeployViewModel _viewModel;
-	AppNode _root;
-	public DeployDatabase(AppNode root)
+	private readonly DeployViewModel _viewModel;
+	private readonly AppNode _root;
+	public DeployDatabase(AppNode root, String solutionName)
 	{
 		_root = root;
 		InitializeComponent();
 		_viewModel = new DeployViewModel()
 		{
 			Server = "localhost",
-			Database = "appbuilder_demo"
+			Database = solutionName
 		};
 		DataContext = _viewModel;
 	}

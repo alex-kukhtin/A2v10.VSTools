@@ -81,12 +81,10 @@
 			Visibility="{Binding SelectedItem, Converter={StaticResource PointerToVisibilityConverter}}">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="150"/>
-				<ColumnDefinition Width="150"/>
+				<ColumnDefinition Width="300"/>
+				<ColumnDefinition Width="1*"/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>

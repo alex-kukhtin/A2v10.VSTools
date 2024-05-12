@@ -1,3 +1,22 @@
 
 14. UiField - зависимости разрешений полей
+
 31. Menu - изменение порядка
+
+34. Если EditItem <> Default, то Details пустой (если он Default)
+    и наоборот
+
+35. В документ добавить Agent.Code - нету Label в Xaml 
+    и вообще не работает
+
+36. EditPage - Title - придумать.
+
+
+
+Реальные шаблоны проектов в 
+Documents\Visual Studio 2022\Templates\ProjectTemplates
+В Documents\Visual Studio 2022\My Exported Templates то, что экспортировано.
+
+
+в файлах .vstemplate заменено <DefaultName>
+в MainApp выброшены лишние xaml-файлы (vs*.xaml)

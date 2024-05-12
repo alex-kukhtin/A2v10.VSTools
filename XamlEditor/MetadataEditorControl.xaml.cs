@@ -11,8 +11,18 @@ public partial class MetadataEditorControl : UserControl
 	public Boolean IsDirty => _viewModel.InitComplete && _viewModel.IsDirty;
 
 	private readonly ViewModel _viewModel  = new();
+	private readonly String _solutionName;
+
 	public MetadataEditorControl()
 	{
+		_solutionName = "TEST";
+		InitializeComponent();
+		DataContext = _viewModel;
+	}
+
+	public MetadataEditorControl(String solutionName)
+	{
+		_solutionName = solutionName;
 		InitializeComponent();
 		DataContext = _viewModel;
 	}
@@ -39,9 +49,9 @@ public partial class MetadataEditorControl : UserControl
 
 	private void DeployDatabase_Click(object sender, RoutedEventArgs e)
 	{
-		var deploy = new DeployDatabase(_viewModel.AppNode)
+		var deploy = new DeployDatabase(_viewModel.AppNode, _solutionName)
 		{
-			Owner = this.Parent as Window
+			Owner = Application.Current.MainWindow
 		};
 		deploy.ShowDialog();
 	}

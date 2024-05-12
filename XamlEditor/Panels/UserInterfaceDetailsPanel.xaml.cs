@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Xml.Linq;
 
 namespace XamlEditor;
 
-/// <summary>
-/// Interaction logic for UserInterfaceDetailsPanel.xaml
-/// </summary>
 public partial class UserInterfaceDetailsPanel : UserControl
 {
+	private DetailsUiNode _uiNode;
 	public UserInterfaceDetailsPanel()
 	{
 		InitializeComponent();
@@ -24,6 +21,7 @@ public partial class UserInterfaceDetailsPanel : UserControl
 	private void UserInterfaceDetailsPanel_DataContextChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
 	{
 		DefaultCheckBox.IsChecked = Node.Fields.Count == 0;
+		_uiNode = DataContext as DetailsUiNode;
 	}
 
 	private void DefaultCheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
@@ -34,6 +32,9 @@ public partial class UserInterfaceDetailsPanel : UserControl
 	}
 	private void AddField_Click(object sender, RoutedEventArgs e)
 	{
+		var field = new UiFieldNode();
+		field.SetParent(_uiNode.GetEndpoint());
+		Node.Fields.Add(field);
 	}
 
 	private void DeleteField_Click(object sender, RoutedEventArgs e)

@@ -12,10 +12,12 @@ namespace A2v10.MetadataEditor
 	public class MetadataEditorPane : WindowPane, IOleComponent, IVsPersistDocData
 	{
 		private MetadataEditorControl _control;
+		private readonly String _solutionName;
 
-		public MetadataEditorPane()
+		public MetadataEditorPane(String solutionName)
 			: base(null)
 		{
+			_solutionName = solutionName;
 			PrivateInit();
 		}
 		void PrivateInit()
@@ -23,7 +25,7 @@ namespace A2v10.MetadataEditor
 		}
 		protected override void Initialize()
 		{
-			_control = new MetadataEditorControl();
+			_control = new MetadataEditorControl(_solutionName);
 			_control.HideSave();
 			Content = _control;
 		}

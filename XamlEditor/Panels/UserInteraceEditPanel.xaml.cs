@@ -24,6 +24,7 @@ public partial class UserInterfaceEditPanel : UserControl
 		_baseNode.OnTableChanged(); // Details may have changed
 	}
 
+	public EndpointNode Endpoint => _endpoint;
 	public IEnumerable<String> SourceFields => _baseNode.RefFields.ToList();
 
 	private void AddField_Click(object sender, RoutedEventArgs e)

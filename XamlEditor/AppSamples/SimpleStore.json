@@ -1,11 +1,225 @@
 {
-	"name": "SimpleStock",
-	"title": "Simple Stock Application",
+	"name": "SimpleStockApp",
+	"title": "Simple Stock application",
 	"catalogs": [
-		{ "name": "Stores" },
-		{ "name": "Items" }
+		{
+			"name": "Units",
+			"fields": [
+				{
+					"name": "Short",
+					"length": 8
+				}
+			]
+		},
+		{
+			"name": "Stores"
+		},
+		{
+			"name": "Agents",
+			"fields": [
+				{
+					"name": "Code",
+					"length": 16
+				}
+			]
+		},
+		{
+			"name": "Items",
+			"fields": [
+				{
+					"name": "SKU"
+				},
+				{
+					"name": "BarCode"
+				},
+				{
+					"name": "Unit",
+					"type": "Reference",
+					"ref": "Catalog.Units"
+				}
+			]
+		}
 	],
 	"documents": [
-		{ "name": "Documents" }
+		{
+			"name": "Documents",
+			"fields": [
+				{
+					"name": "Kind",
+					"length": 16
+				},
+				{
+					"name": "StoreIn",
+					"type": "Reference",
+					"ref": "Catalog.Stores"
+				},
+				{
+					"name": "StoreOut",
+					"type": "Reference",
+					"ref": "Catalog.Stores"
+				},
+				{
+					"name": "Agent",
+					"type": "Reference",
+					"ref": "Catalog.Agents"
+				}
+			],
+			"details": [
+				{
+					"name": "Rows",
+					"fields": [
+						{
+							"name": "Item",
+							"type": "Reference",
+							"ref": "Catalog.Items"
+						},
+						{
+							"name": "Qty",
+							"type": "Float"
+						},
+						{
+							"name": "Price",
+							"type": "Float"
+						},
+						{
+							"name": "Sum",
+							"type": "Money"
+						}
+					]
+				}
+			]
+		}
+	],
+	"journals": [
+		{
+			"name": "Stock",
+			"fields": [
+				{
+					"name": "Document",
+					"type": "Reference",
+					"ref": "Document.Documents"
+				},
+				{
+					"name": "Agent",
+					"type": "Reference",
+					"ref": "Catalog.Agents"
+				},
+				{
+					"name": "Store",
+					"type": "Reference",
+					"ref": "Catalog.Stores"
+				},
+				{
+					"name": "Item",
+					"type": "Reference",
+					"ref": "Catalog.Items"
+				},
+				{
+					"name": "Qty",
+					"type": "Float"
+				},
+				{
+					"name": "Sum",
+					"type": "Float"
+				}
+			]
+		}
+	],
+	"endpoints": [
+		{
+			"name": "/document/billin",
+			"hasApply": true,
+			"table": "Document.Documents",
+			"title": "Прибуткова накладна",
+			"parameters": {
+				"Kind": "Income"
+			},
+			"apply": [
+				{
+					"journal": "Stock",
+					"in": true,
+					"source": "Document.Rows"
+				}
+			]
+		},
+		{
+			"name": "/document/billout",
+			"hasApply": true,
+			"table": "Document.Documents",
+			"title": "Видаткова накладна",
+			"parameters": {
+				"Kind": "Outgoing"
+			},
+			"apply": [
+				{
+					"journal": "Stock",
+					"out": true,
+					"source": "Document.Rows"
+				}
+			]
+		},
+		{
+			"name": "/document/billmove",
+			"hasApply": true,
+			"table": "Document.Documents",
+			"title": "Накладна на переміщення",
+			"parameters": {
+				"Kind": "Move"
+			},
+			"apply": [
+				{
+					"journal": "Stock",
+					"in": true,
+					"out": true,
+					"source": "Document.Rows"
+				}
+			]
+		}
+	],
+	"menu": [
+		{
+			"name": "Склад",
+			"icon": "warehouse",
+			"items": [
+				{
+					"name": "Документи",
+					"items": [
+						{
+							"name": "Прибуткові накладні",
+							"url": "/document/billin"
+						},
+						{
+							"name": "Видаткові накладні",
+							"url": "/document/billout"
+						},
+						{
+							"name": "Накладні на переміщення",
+							"url": "/document/billmove"
+						}
+					]
+				},
+				{
+					"name": "Довідники",
+					"items": [
+						{
+							"name": "Контрагенти",
+							"url": "/catalog/agent"
+						},
+						{
+							"name": "Склади",
+							"url": "/catalog/store"
+						},
+						{
+							"name": "Товари",
+							"url": "/catalog/item"
+						},
+						{
+							"name": "Одиниці виміру",
+							"url": "/catalog/unit"
+						}
+					]
+				}
+			]
+		}
 	]
 }

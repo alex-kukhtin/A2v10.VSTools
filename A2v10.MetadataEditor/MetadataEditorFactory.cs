@@ -10,6 +10,11 @@ namespace A2v10.MetadataEditor
 	public class MetadataEditorFactory : IVsEditorFactory, IDisposable
 	{
 		private ServiceProvider _vsServiceProvider;
+		private readonly String _solutionName;
+		public MetadataEditorFactory(String solutionName)
+		{
+			_solutionName = solutionName;
+		}
 		public int CreateEditorInstance(uint grfCreateDoc, string pszMkDocument, string pszPhysicalView, IVsHierarchy pvHier, uint itemid, IntPtr punkDocDataExisting, out IntPtr ppunkDocView, out IntPtr ppunkDocData, out string pbstrEditorCaption, out Guid pguidCmdUI, out int pgrfCDW)
 		{
 			// Initialize to null
@@ -30,7 +35,7 @@ namespace A2v10.MetadataEditor
 			}
 
 			// Create the Document (editor)
-			MetadataEditorPane newEditor = new MetadataEditorPane();
+			MetadataEditorPane newEditor = new MetadataEditorPane(_solutionName);
 			ppunkDocView = Marshal.GetIUnknownForObject(newEditor);
 			ppunkDocData = Marshal.GetIUnknownForObject(newEditor);
 			pbstrEditorCaption = "";

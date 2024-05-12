@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 
 namespace XamlEditor;
@@ -25,7 +26,10 @@ public class MenuNode : BaseNode
 	{
 		base.OnInit(root);
 		foreach (var item in Items)
+		{
+			item.OnInit(root);
 			item.SetLevel(0);
+		}
 	}
 
 	public IEnumerable<String> AllEnpoints()
@@ -66,11 +70,22 @@ public record MenuSqlNode
 }
 public class MenuItemNode : BaseNode
 {
+	public MenuItemNode()
+	{
+		Items.CollectionChanged += Items_CollectionChanged;
+	}
+
+	private void Items_CollectionChanged(Object sender, NotifyCollectionChangedEventArgs e)
+	{
+		if (_root != null)
+			_root.IsDirty = true;
+	}
+
 	[JsonProperty(Order = 3)]
 	public ObservableCollection<MenuItemNode> Items { get; set; } = [];
 	public Boolean ShouldSerializeItems() => Items.Count > 0;
 
-	Guid _id;
+	Guid _id = Guid.NewGuid();
 	[JsonProperty(Order = -10)]
 	public Guid Id { get => _id; set { _id = value; OnPropertyChanged(); } }
 
@@ -112,5 +127,13 @@ public class MenuItemNode : BaseNode
 			foreach (var pe in m.PlainElements(this.Id, _order += 10))
 				yield return pe;
 		}			
+	}
+
+	internal override void OnInit(AppNode root)
+	{
+		_root = root;
+		foreach (var itm in Items)
+			itm.OnInit(root);	
+		base.OnInit(root);
 	}
 }

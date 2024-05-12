@@ -46,7 +46,7 @@
 						<ColumnDefinition Width="100"/>
 						<ColumnDefinition Width="100"/>
 						<ColumnDefinition Width="60"/>
-						<ColumnDefinition Width="150"/>
+						<ColumnDefinition Width="200"/>
 					</Grid.ColumnDefinitions>
 					<Button Grid.Column="0" Content="＋" Width="25"
 							Click="AddField_Click"/>
@@ -64,7 +64,7 @@
 									<ColumnDefinition Width="100"/>
 									<ColumnDefinition Width="100"/>
 									<ColumnDefinition Width="60"/>
-									<ColumnDefinition Width="150"/>
+									<ColumnDefinition Width="200"/>
 								</Grid.ColumnDefinitions>
 								<TextBox Grid.Column="1" Text="{Binding Name}" IsEnabled="False"/>
 								<ComboBox Grid.Column="2" 
@@ -86,7 +86,7 @@
 									<ColumnDefinition Width="100"/>
 									<ColumnDefinition Width="100"/>
 									<ColumnDefinition Width="60"/>
-									<ColumnDefinition Width="150"/>
+									<ColumnDefinition Width="200"/>
 								</Grid.ColumnDefinitions>
 								<StackPanel Grid.Column="0" Orientation="Horizontal" Margin="3">
 									<Button Content="⨉" Width="25" Click="DeleteField_Click" CommandParameter="{Binding}"/>
