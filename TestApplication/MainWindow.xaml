@@ -7,7 +7,5 @@
         xmlns:local="clr-namespace:TestApplication"
         mc:Ignorable="d"
         Title="MainWindow" Height="768" Width="1280">
-    <md:MetadataEditorControl x:Name="MetaEditor">
-        
-    </md:MetadataEditorControl>
+	<md:MetadataEditorControl x:Name="MetaEditor" />
 </Window>

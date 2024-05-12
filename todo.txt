@@ -3,12 +3,6 @@
 
 31. Menu - изменение пор€дка
 
-34. ≈сли EditItem <> Default, то Details пустой (если он Default)
-    и наоборот
-
-35. ¬ документ добавить Agent.Code - нету Label в Xaml 
-    и вообще не работает
-
 36. EditPage - Title - придумать.
 
 

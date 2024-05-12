@@ -31,7 +31,7 @@ namespace XamlEditor
 
 		private void DeleteField_Click(object sender, RoutedEventArgs e)
 		{
-			if (!(e.Source is Button btnObj) || !(btnObj.CommandParameter is FieldNode fn))
+			if (e.Source is not Button btnObj || btnObj.CommandParameter is not FieldNode fn)
 				return;
 			_table.Fields.Remove(fn);
 		}

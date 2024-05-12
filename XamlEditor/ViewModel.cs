@@ -129,7 +129,7 @@ public class ViewModel : INotifyPropertyChanged
 		} 
 	}
 
-	public CreateSampleCommand CreateSampleCommand => new CreateSampleCommand(this);	
+	public CreateSampleCommand CreateSampleCommand => new(this);	
 
 	public void CreateSampleApplication(String appName)
 	{
