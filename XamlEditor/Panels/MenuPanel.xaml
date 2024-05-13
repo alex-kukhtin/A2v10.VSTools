@@ -45,6 +45,17 @@
 				</StackPanel>
 			</Button>
 			<Separator />
+			<Button x:Name="MoveUp" Click="MoveUp_Click"
+					 IsEnabled="{Binding HasSelected}">
+				<Image Source="/XamlEditor;Component/Images/MoveUp.png" Margin="2"
+						Width="16" Height="16"/>
+			</Button>
+			<Button x:Name="MoveDown" Click="MoveDown_Click"
+					 IsEnabled="{Binding HasSelected}">
+				<Image Source="/XamlEditor;Component/Images/MoveDown.png" Margin="2"
+						Width="16" Height="16"/>
+			</Button>
+			<Separator />
 			<Button x:Name="DeleteItem" Click="DeleteItem_Click" ToolTip="Delete Item"
 					 IsEnabled="{Binding HasSelected}">
 				<Image Source="/XamlEditor;Component/Images/Cancel.png" Margin="2"

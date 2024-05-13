@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace XamlEditor;
 
@@ -56,6 +57,17 @@ public class MenuNode : BaseNode
 		else
 			foreach (var item in Items)
 				item.RemoveItem(sel);	
+	}
+
+	public ObservableCollection<MenuItemNode> FindCollection()
+	{
+		var sel = SelectedItem;
+		if (Items.IndexOf(sel) != -1)
+			return Items;
+		else
+			foreach (var item in Items)
+				return item.FindCollection(sel);
+		return null;
 	}
 }
 
@@ -109,6 +121,19 @@ public class MenuItemNode : BaseNode
 		else
 			foreach (var item in Items)
 				item.RemoveItem(sel);
+	}
+	internal ObservableCollection<MenuItemNode> FindCollection(MenuItemNode sel)
+	{
+		if (Items.IndexOf(sel) != -1)
+			return Items;
+		else
+			foreach (var item in Items)
+			{
+				var x = item.FindCollection(sel);
+				if (x != null)
+					return x;
+			}
+		return null;
 	}
 
 	internal void SetLevel(Int32 level)

@@ -1,8 +1,10 @@
 ﻿// Copyright © 2024 Oleksandr Kukhtin. All rights reserved.
 
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace XamlEditor;
 
@@ -63,5 +65,35 @@ public partial class MenuPanel : UserControl
 		if (_menuNode.SelectedItem == null)
 			return;
 		_menuNode.RemoveSelected();
+	}
+
+	private void MoveUp_Click(object sender, RoutedEventArgs e)
+	{
+		if (_menuNode.SelectedItem == null)
+			return;
+		var sel = _menuNode.SelectedItem;
+		var coll = _menuNode.FindCollection();
+		if (coll == null)
+			return;
+		int pos = coll.IndexOf(sel);
+		if (pos < 1)
+			return;
+		coll.Move(pos, pos - 1);
+
+	}
+
+	private void MoveDown_Click(object sender, RoutedEventArgs e)
+	{
+		if (_menuNode.SelectedItem == null)
+			return;
+		var sel = _menuNode.SelectedItem;
+		var coll = _menuNode.FindCollection();
+		if (coll == null)
+			return;
+		int pos = coll.IndexOf(sel);
+		if (pos >= coll.Count - 1)
+			return;
+		coll.Move(pos, pos + 1);
+
 	}
 }

@@ -1,8 +1,6 @@
 
 14. UiField - зависимости разрешений полей
 
-31. Menu - изменение порядка
-
 36. EditPage - Title - придумать.
 
 
@@ -12,5 +10,5 @@ Documents\Visual Studio 2022\Templates\ProjectTemplates
 В Documents\Visual Studio 2022\My Exported Templates то, что экспортировано.
 
 
-в файлах .vstemplate заменено <DefaultName>
+в файлах .vstemplate заменено <Name>, <Description>
 в MainApp выброшены лишние xaml-файлы (vs*.xaml)
