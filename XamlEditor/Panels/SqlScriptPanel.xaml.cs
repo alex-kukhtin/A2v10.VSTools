@@ -9,6 +9,7 @@ namespace XamlEditor;
 public class SqlScriptViewModel(AppNode _root)
 {
 	public String CreateTableScript => new SqlTextBuilder(_root).BuildTables();
+	public String CreateUiScript => new SqlTextBuilder(_root).BuildUI();
 }
 
 public partial class SqlScriptPanel : UserControl

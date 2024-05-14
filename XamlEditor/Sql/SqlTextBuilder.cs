@@ -148,8 +148,9 @@ internal class SqlTextBuilder(AppNode _node)
 		""");
 
 		List<String> menuFields = [];
+		Int32 order = 0;
 		foreach (var menu in _node.Menu)
-			foreach (var me in menu.PlainElements(Guid.Empty))
+			foreach (var me in menu.PlainElements(Guid.Empty, order += 10))
 				menuFields.Add($"(N'{me.Id}', N'{me.Parent}', {me.Order}, {me.Name.StringValueOrNull()}, {me.Url.StringValueOrNull("page:", "/index/0")}, {me.Icon.StringValueOrNull()})");
 
 		sb.AppendLine($""""

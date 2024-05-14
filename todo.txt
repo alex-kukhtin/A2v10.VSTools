@@ -3,6 +3,7 @@
 
 36. EditPage - Title - придумать.
 
+37. DB Migrations 
 
 
 Реальные шаблоны проектов в 
