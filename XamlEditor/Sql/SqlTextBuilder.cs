@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 
 namespace XamlEditor;
@@ -16,23 +15,31 @@ internal class SqlTextBuilder(AppNode _node)
 
 		""";
 
-	public String BuildTables()
+	public IEnumerable<String> BuildTablesArray()
 	{
-		StringBuilder builder = new(AUTO_GENERATED);
 		foreach (var t in _node.Catalogs)
 		{
-			builder.AppendLine(BuildTable(t, _node));
+			yield return BuildTable(t, _node);
 			foreach (var d in t.Details)
-				builder.AppendLine(BuildTable(d, _node));
+				yield return BuildTable(d, _node);
 		}
 		foreach (var t in _node.Documents)
 		{
-			builder.AppendLine(BuildTable(t, _node));
+			yield return BuildTable(t, _node);
 			foreach (var d in t.Details)
-				builder.AppendLine(BuildTable(d, _node));
+				yield return BuildTable(d, _node);
 		}
 		foreach (var t in _node.Journals)
-			builder.AppendLine(BuildTable(t, _node));
+			yield return BuildTable(t, _node);
+
+	}
+	public String BuildTables()
+	{
+		StringBuilder builder = new(AUTO_GENERATED);
+		foreach (var t in BuildTablesArray())
+		{
+			builder.AppendLine(t);
+		}
 		return builder.ToString();
 	}
 
@@ -151,7 +158,7 @@ internal class SqlTextBuilder(AppNode _node)
 		Int32 order = 0;
 		foreach (var menu in _node.Menu)
 			foreach (var me in menu.PlainElements(Guid.Empty, order += 10))
-				menuFields.Add($"(N'{me.Id}', N'{me.Parent}', {me.Order}, {me.Name.StringValueOrNull()}, {me.Url.StringValueOrNull("page:", "/index/0")}, {me.Icon.StringValueOrNull()})");
+				menuFields.Add($"(N'{me.Id}', N'{me.Parent}', {me.Order}, {me.MenuName().StringValueOrNull()}, {me.Url.StringValueOrNull("page:", "/index/0")}, {me.Icon.StringValueOrNull()}, {me.MenuClassName()})");
 
 		sb.AppendLine($""""
 
@@ -160,9 +167,9 @@ internal class SqlTextBuilder(AppNode _node)
 
 			declare @menu a2ui.[Menu.TableType];
 
-			insert into @menu(Id, Parent, [Order], [Name], [Url], Icon)
+			insert into @menu(Id, Parent, [Order], [Name], [Url], Icon, ClassName)
 			values
-			(N'{Guid.Empty}', null, 0, N'Main', null, null),
+			(N'{Guid.Empty}', null, 0, N'Main', null, null, null),
 			{String.Join(",\r\n\t", menuFields)};
 
 			exec a2ui.[Menu.Merge] 1, @menu, @ModuleId;

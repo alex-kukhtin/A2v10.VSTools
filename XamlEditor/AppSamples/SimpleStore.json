@@ -79,7 +79,7 @@
 						},
 						{
 							"name": "Price",
-							"type": "Float"
+							"type": "Money"
 						},
 						{
 							"name": "Sum",

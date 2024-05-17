@@ -79,6 +79,16 @@ public record MenuSqlNode
 	public String Url;
 	public Int32 Order;
 	public String Icon;
+
+	public String MenuClassName()
+	{
+		return Name == "<Aligner>" ? "N'grow'" : "null";
+	}
+
+	public String MenuName()
+	{
+		return Name == "<Aligner>" ? null : Name;
+	}
 }
 public class MenuItemNode : BaseNode
 {

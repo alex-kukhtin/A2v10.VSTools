@@ -6,8 +6,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Windows;
 using Newtonsoft.Json;
 
@@ -142,5 +142,12 @@ public class ViewModel : INotifyPropertyChanged
 		_appNode.Id = Guid.NewGuid();
 		OnCreateAppNode();
 		_appNode.OnPropertyChanged(String.Empty);
+	}
+
+	public String PlatformSqlScript()
+	{
+		var dir = Path.GetDirectoryName(_path);
+		String sqlPpath = Path.Combine(dir, "@sql", "a2v10_platform.sql");
+		return File.ReadAllText(sqlPpath);
 	}
 }

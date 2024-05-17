@@ -11,7 +11,7 @@ namespace XamlEditor
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (!(value is Boolean boolVal))
+			if (value is not Boolean boolVal)
 				throw new InvalidCastException("Expected 'boolean'");
 			if (parameter != null && parameter.ToString() == "Invert")
 				return boolVal ? Visibility.Collapsed : Visibility.Visible;

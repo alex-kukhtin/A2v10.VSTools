@@ -99,16 +99,27 @@
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
-			<Label Grid.Row="0" Grid.Column="0" Content="Name"></Label>
+			<Label Grid.Row="0" Grid.Column="0" Content="Name"/>
 			<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedItem.Name}"/>
-			
-			<Label Grid.Row="2" Grid.Column="0" Content="Icon"></Label>
-			<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedItem.Icon}"/>
 
-			<Label Grid.Row="1" Grid.Column="0" Content="Url"></Label>
+			<Label Grid.Row="1" Grid.Column="0" Content="Url"/>
 			<ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AvailableEndpoints}"
 					 SelectedValue="{Binding SelectedItem.Url}"/>
+
+			<Label Grid.Row="2" Grid.Column="0" Content="Icon"/>
+			<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedItem.Icon}"/>
+
+			<!--
+			<Label Grid.Row="3" Grid.Column="0" Content="Aligner"/>
+			<CheckBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Margin="3"/>
+			
+			<Label Grid.Row="4" Grid.Column="0" Content="Parameters"/>
+			<TextBox Grid.Row="4" Grid.Column="1" />
+			-->
 		</Grid>
 		<GridSplitter Width="5" Grid.Column="1" Grid.Row="2"
 					  HorizontalAlignment="Center" VerticalAlignment="Stretch"/>

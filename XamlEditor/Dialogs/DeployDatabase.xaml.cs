@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace XamlEditor;
@@ -9,10 +10,10 @@ namespace XamlEditor;
 public partial class DeployDatabase : Window
 {
 	private readonly DeployViewModel _viewModel;
-	private readonly AppNode _root;
-	public DeployDatabase(AppNode root, String solutionName)
+	private readonly ViewModel _root;
+	public DeployDatabase(ViewModel vm, String solutionName)
 	{
-		_root = root;
+		_root = vm;
 		InitializeComponent();
 		_viewModel = new DeployViewModel()
 		{
@@ -28,9 +29,14 @@ public partial class DeployDatabase : Window
 		Close();
 	}
 
-	private void DeployBtn_Click(object sender, RoutedEventArgs e)
+	private async void DeployBtn_Click(object sender, RoutedEventArgs e)
 	{
-		MessageBox.Show("Deploy database at: " + _viewModel.ConnectionString,
-			"Deploy", MessageBoxButton.OK, MessageBoxImage.Information);
+		_viewModel.IsProgress = true;
+
+		await SqlDeploy.DeployDatabase(_root, _viewModel.Server, _viewModel.Database, v => _viewModel.Progress = v);
+
+		_viewModel.IsProgress = false;
+		DialogResult = true;
+		Close();
 	}
 }

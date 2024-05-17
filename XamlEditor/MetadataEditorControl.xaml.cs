@@ -49,7 +49,7 @@ public partial class MetadataEditorControl : UserControl
 
 	private void DeployDatabase_Click(object sender, RoutedEventArgs e)
 	{
-		var deploy = new DeployDatabase(_viewModel.AppNode, _solutionName)
+		var deploy = new DeployDatabase(_viewModel, _solutionName)
 		{
 			Owner = Application.Current.MainWindow
 		};

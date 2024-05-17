@@ -1,4 +1,10 @@
 
+Links
+https://habr.com/ru/companies/pvs-studio/articles/192486/
+
+Create extension pack
+https://learn.microsoft.com/en-us/visualstudio/extensibility/walkthough-create-extension-pack?view=vs-2022
+
 14. UiField - зависимости разрешений полей
 
 36. EditPage - Title - придумать.
