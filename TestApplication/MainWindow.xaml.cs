@@ -1,18 +1,17 @@
 ﻿
 using System.Windows;
 
-namespace TestApplication
+namespace TestApplication;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
+	public MainWindow()
 	{
-		public MainWindow()
-		{
-			InitializeComponent();
-			//MetaEditor.LoadDocument("C:\\Projects\\AppBuilder2024\\MainApp\\app.metadata");
-			MetaEditor.LoadDocument("D:\\Experiment\\Step1\\MainApp\\app.metadata");
-		}
+		InitializeComponent();
+		//MetaEditor.LoadDocument("C:\\Projects\\AppBuilder2024\\MainApp\\app.metadata");
+		MetaEditor.LoadDocument("C:\\Projects\\AppBuilder2024\\MainApp\\app.metadata");
 	}
 }

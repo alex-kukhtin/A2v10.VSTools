@@ -51,7 +51,7 @@ internal static class SqlFieldExtensions
 	}
 
 	private static readonly HashSet<String> _escapeNames =
-		[.. "Begin,End,Start,Name,Date,Sum,Avg,Min,Max,Rows,External,File,For,From,To,Group,Case,If,Into,Table,Tran,Union,Update,Insert,Delete,Inner,Outer,Version,Uid"
+		[.. "Begin,End,Start,Name,Date,Sum,Avg,Min,Max,Rows,External,File,For,From,To,Group,Case,If,Into,Table,Tran,Union,Update,Insert,Delete,Inner,Outer,Version,Uid,Contract,"
 			.Split([','], StringSplitOptions.RemoveEmptyEntries)];
 	public static String EscapeSql(this String name) 
 	{
