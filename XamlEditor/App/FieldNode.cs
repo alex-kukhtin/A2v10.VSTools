@@ -72,7 +72,7 @@ public class FieldNode : BaseNode, IDataErrorInfo
 
 	void OnRefChanged()
 	{
-		if (_ref.Contains(".")) {
+		if (_ref.Contains(".") && Name.StartsWith("Field", StringComparison.Ordinal)) {
 			var spl = _ref.Split('.');
 			Name = spl[1].Singular();
 		}
