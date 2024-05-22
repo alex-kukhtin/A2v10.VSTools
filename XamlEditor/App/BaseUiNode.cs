@@ -84,4 +84,11 @@ public class BaseUiNode : ObservableNode
 			}
 		}
 	}
+
+
+	public virtual void Clear()
+	{
+		Fields.Clear();
+		OnPropertyChanged(String.Empty);
+	}
 }

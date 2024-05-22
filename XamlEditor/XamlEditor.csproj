@@ -59,6 +59,7 @@
     <Compile Include="App\JsonScriptNode.cs" />
     <Compile Include="App\SqlScriptNode.cs" />
     <Compile Include="Commands\CreateSampleCommand.cs" />
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Converters\PointerToVisibilityConverter.cs" />
     <Compile Include="Dialogs\DeployDatabase.xaml.cs">
       <DependentUpon>DeployDatabase.xaml</DependentUpon>

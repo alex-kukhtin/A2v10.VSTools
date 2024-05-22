@@ -16,7 +16,7 @@ namespace XamlEditor
 
 		public Boolean IsEmpty()
 		{
-			return Index.IsEmpty() && Browse.IsEmpty() && Edit.IsEmpty();	
+			return Index.IsEmpty() && Browse.IsEmpty() && Edit.IsEmpty();
 		}
 
 		private EndpointNode _endpoint;
@@ -28,10 +28,17 @@ namespace XamlEditor
 			Edit.SetParent(endpoint);
 		}
 		internal void OnTableChanged()
-		{ 
+		{
 			Index.OnTableChanged();
 			Browse.OnTableChanged();
 			Edit.OnTableChanged();
+		}
+
+		public virtual void Clear()
+		{
+			Index.Clear();
+			Browse.Clear();
+			Edit.Clear();
 		}
 	}
 }

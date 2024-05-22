@@ -75,4 +75,11 @@ public class EditUiNode : BaseUiNode
 		foreach (var f in def)
 			Fields.Add(f);
 	}
+
+	public override void Clear()
+	{
+		foreach (var d in Details)
+			d.Clear();
+		base.Clear();
+	}
 }

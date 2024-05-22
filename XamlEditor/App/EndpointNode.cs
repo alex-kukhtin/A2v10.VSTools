@@ -123,6 +123,13 @@ namespace XamlEditor
 
 		[JsonIgnore]
 		public IEnumerable<String> ParamFields => FindTable(Table).Fields.Select(s => s.Name);
+
+		public void Clear()
+		{
+			UI.Clear();
+			Apply.Clear();
+			OnPropertyChanged(String.Empty);
+		}
 	}
 
 	public class EndpointsNode : BaseNode
