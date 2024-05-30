@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="A2v10.MetadataEditor.3b64480e-691a-4fb0-bc6a-763b8b4d349b" Version="10.1.8292" Language="en-US" Publisher="Oleksandr Kukhtin" />
+        <Identity Id="A2v10.MetadataEditor.3b64480e-691a-4fb0-bc6a-763b8b4d349b" Version="10.1.8293" Language="en-US" Publisher="Oleksandr Kukhtin" />
         <DisplayName>A2v10 application metadata editor</DisplayName>
         <Description xml:space="preserve">Visual editor for A2v10 app.metdata files</Description>
         <MoreInfo>https://docs.a2v10.com</MoreInfo>

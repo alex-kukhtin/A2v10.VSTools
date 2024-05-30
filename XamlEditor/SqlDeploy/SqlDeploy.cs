@@ -43,6 +43,12 @@ internal class SqlDeploy
 
 	private async Task Deploy()
 	{
+		var platformSqlScript = _vm.PlatformSqlScript();
+		if (platformSqlScript == null)
+		{
+			MessageBox.Show("Build the solution first", "Deploy", MessageBoxButton.OK, MessageBoxImage.Warning);
+			return;
+		}
 		using (var cnnMaster = new SqlConnection(ConnectionStringMaster))
 		{
 			cnnMaster.Open();

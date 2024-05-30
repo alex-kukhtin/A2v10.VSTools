@@ -148,6 +148,8 @@ public class ViewModel : INotifyPropertyChanged
 	{
 		var dir = Path.GetDirectoryName(_path);
 		String sqlPpath = Path.Combine(dir, "@sql", "a2v10_platform.sql");
+		if (!File.Exists(sqlPpath))
+			return null;
 		return File.ReadAllText(sqlPpath);
 	}
 }
